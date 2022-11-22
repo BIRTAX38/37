@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Quizziz Answers
 // @namespace    https://quizizz.com/
-// @version      0.1
+// @version      0.2
 // @description  Script show correct answers. B37 isn't not owner of this script
 // @author       Remake B37
 // @updateURL    https://raw.githubusercontent.com/BIRTAX38/37/main/37/Quizziz.js
