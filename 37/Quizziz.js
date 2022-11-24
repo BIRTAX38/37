@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Quizziz Answers
+// @name         Quizziz Answers37
 // @namespace    https://quizizz.com/
 // @version      0.2
 // @description  Script show correct answers. B37 isn't not owner of this script
@@ -12,7 +12,7 @@
 // @grant        none
 // ==/UserScript==
 
-const answers = [{"answers":[{"text":"<p>jhjhg</p>"}],"question":{"text":"<p>easd</p>"},"type":"MCQ","_id":"637d2fdc4a98a4001daa8301"},{"answers":[{"text":"<p>jf</p>"}],"question":{"text":"<p>sda</p>"},"type":"MCQ","_id":"637d2ff4f21cb7001d107558"}];async function fetchAnswers(mongoId, roomHash) {
+const answers = [{"type":"MCQ"}];async function fetchAnswers(mongoId, roomHash) {
   const {data} = await fetch(
     `https://api.quizit.online/quizizz/answers/hash?roomHash=${roomHash}&mongoId=${mongoId}`
   ).then(res => res.json());
