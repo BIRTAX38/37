@@ -179,7 +179,7 @@ function searchAnswer(answers) {
 }
 
 function highlightAnswer(el) {
-  el.querySelector(".bpl-container").style.backgroundColor = "green";
+  el.querySelector(".bpl-container").style.backgroundColor = "#62C370";
 }
 
 bootstrap();
