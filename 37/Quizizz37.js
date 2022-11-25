@@ -2,7 +2,7 @@
 // @name         Quizziz Answers37
 // @namespace    https://quizizz.com/
 // @version      0.2
-// @description  Script show correct answers. B37 isn't not owner of this script
+// @description  The script shows the correct answers. B37 is not the owner of this script
 // @author       Remake B37
 // @updateURL    https://raw.githubusercontent.com/BIRTAX38/37/main/37/Quizizz37.js
 // @downloadURL  https://raw.githubusercontent.com/BIRTAX38/37/main/37/Quizizz37.js
