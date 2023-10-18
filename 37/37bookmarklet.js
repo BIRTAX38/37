@@ -1,4 +1,4 @@
-if ((document.location.href.endsWith("/exam/LoadQuestion.html") || document.location.href.endsWith("/exam/DoStartTest.html")) &&
+if ((document.location.href.endsWith("/exam/LoadQuestion.html") || document.location.href.endsWith("/exam/DoStartTest.html") || document.location.href.endsWith("/exam/DoTestQuestion.html")) &&
     (window.location.hostname.endsWith("testportal.net") || window.location.hostname.endsWith("testportal.pl"))) {
 
     let antitestportalElement37 = document.getElementById("antitestportal37");
