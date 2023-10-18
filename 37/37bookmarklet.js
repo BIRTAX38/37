@@ -8,6 +8,7 @@ if ((document.location.href.endsWith("/exam/LoadQuestion.html") || document.loca
     let antitestportalElement37 = document.createElement("div");
     antitestportalElement37.id = "antitestportal37";
     antitestportalElement37.style.display = "none";
+    let questionContainer = document.querySelector(".question-container");
     questionContainer.appendChild(antitestportalElement37);
 
         fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/37testportal.js').then(function (response) {
