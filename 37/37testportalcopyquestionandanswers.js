@@ -1,3 +1,8 @@
+// Wybieramy element o klasie "logo_wide" i "logo_default"
+const logotestportal = document.querySelector(".logo_wide.logo_default");
+
+// Dodajemy obsługę zdarzenia kliknięcia na ten element
+logotestportal.addEventListener("click", function() {
 // Pobranie elementów z klasą "question_essence"
 const questionEssenceElements = document.querySelectorAll('.question_essence');
 
@@ -52,3 +57,4 @@ function copyTextToClipboard(text) {
 
 // Skopiowanie połączonego tekstu do schowka
 copyTextToClipboard(combinedtextdogpt);
+});
