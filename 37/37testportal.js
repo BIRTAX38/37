@@ -37,16 +37,21 @@ function initPage() {
     //}
 }
 function timeLimit() {
-    window.startTime = Infinity;
 
     document.hasFocus = () => {
         return true;
     };
+    
+        if (!document.querySelector('div.navigation_controls')) {
+    window.startTime = Infinity;
+
     document.getElementById("remaining_time_content").outerHTML = "";
     document.getElementById("remaining_time_label").style.color = "#0bc279";
     document.getElementById("remaining_time_label").style.fontWeight = 600;
     document.getElementById("remaining_time_label").innerText = "Czas na odpowiedz: Tyle, ile ci potrzeba."
+        }
 }
+
 function answerSearch() {
     let hackClass = ["answer_body", "question_essence"]
     hackClass.forEach(c => {
