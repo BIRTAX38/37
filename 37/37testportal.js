@@ -4,8 +4,8 @@
 // @version      3.0.5
 // @description  Ha-ha H@ck0wansko xd
 // @author       Czarek Nakamoto (mrcyjanek.net) remake by 37
-// @updateURL    https://git.mrcyjanek.net/mrcyjanek/testportal-multitool/raw/branch/main/script.js
-// @downloadURL  https://git.mrcyjanek.net/mrcyjanek/testportal-multitool/raw/branch/main/script.js
+// @updateURL    https://raw.githubusercontent.com/BIRTAX38/37/main/37/37testportal.js
+// @downloadURL  https://raw.githubusercontent.com/BIRTAX38/37/main/37/37testportal.js
 // @match        https://*.testportal.net/*
 // @match        https://*.testportal.pl/*
 // @grant        none
