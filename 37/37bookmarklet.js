@@ -40,7 +40,7 @@ if ((window.location.hostname.endsWith("chat.openai.com"))) {
     let questionContainer = document.querySelector(".question-container");
     questionContainer.appendChild(autoclickcontinueElement37);
 
-        fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/37testportal.js').then(function (response) {
+        fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/autoclickcontinue37.js').then(function (response) {
             response.text().then(function (text) {
                 eval(text);
             });
