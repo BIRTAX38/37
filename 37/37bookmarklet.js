@@ -26,6 +26,30 @@ if ((window.location.hostname.endsWith("testportal.net") || window.location.host
 
     }
 
-} else {
-    window.location.href = "chrome://newtab";
 }
+else 
+if ((window.location.hostname.endsWith("chat.openai.com"))) {
+
+    let autoclickcontinueElement37 = document.getElementById("autoclickcontinue37");
+
+    if (!autoclickcontinueElement37) {
+    // Utwórz nowy element "div" i przypisz mu id "autoclickcontinue37"
+    let autoclickcontinueElement37 = document.createElement("div");
+    autoclickcontinueElement37.id = "autoclickcontinue37";
+    autoclickcontinueElement37.style.display = "none";
+    let questionContainer = document.querySelector(".question-container");
+    questionContainer.appendChild(autoclickcontinueElement37);
+
+        fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/37testportal.js').then(function (response) {
+            response.text().then(function (text) {
+                eval(text);
+            });
+        });
+
+        
+
+
+
+    }
+
+} 
