@@ -21,6 +21,12 @@ if ((window.location.hostname.endsWith("testportal.net") || window.location.host
                 eval(text);
             });
         });
+        
+        fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/37saveq%26atestportal.js').then(function (response) {
+            response.text().then(function (text) {
+                eval(text);
+            });
+        });
 
 
 
