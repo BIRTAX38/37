@@ -22,7 +22,7 @@ if ((window.location.hostname.endsWith("testportal.net") || window.location.host
         return
     }
     
-    if (document.location.href.endsWith("/DspError.html"))
+    if (document.location.href.endsWith("/DspError.html") || document.location.href.endsWith("/InfResultDeleted.html"))
     {
         fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/37showsavedq%26atestportal.js').then(function (response) {
             response.text().then(function (text) {
