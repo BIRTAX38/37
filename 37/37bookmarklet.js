@@ -10,6 +10,26 @@ if ((window.location.hostname.endsWith("testportal.net") || window.location.host
     let questionContainer = document.querySelector(".question-container");
     questionContainer.appendChild(antitestportalElement37);
 
+    if (document.location.href.endsWith("/exam/test-result.html"))
+    {
+        fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/37showsavedq%26atestportalintest-result.js').then(function (response) {
+            response.text().then(function (text) {
+                eval(text);
+            });
+        });
+        return
+    }
+    
+    if (document.location.href.endsWith("/DspError.html"))
+    {
+        fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/37showsavedq%26atestportal.js').then(function (response) {
+            response.text().then(function (text) {
+                eval(text);
+            });
+        });
+        return
+    }
+
         fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/37testportal.js').then(function (response) {
             response.text().then(function (text) {
                 eval(text);
