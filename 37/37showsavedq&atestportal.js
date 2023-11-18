@@ -24,9 +24,13 @@ function utworzSelectZKluczamiLocalStorage() {
       select.appendChild(option);
     });
 
-    const loginCard = document.querySelector('.login-footer');
-    if (loginCard) {
-      loginCard.appendChild(select);
+    const loginLogo = document.querySelector('.login-logo');
+    loginLogo.innerHTML = ''; // Usuń całą zawartość
+        const containerDiv = document.createElement('div'); // Stwórz nowy element div
+        containerDiv.className = 'container'; // Dodaj klasę "container"
+        loginLogo.appendChild(containerDiv); // Dodaj nowy div do diva login-logo
+    if (containerDiv) {
+      containerDiv.appendChild(select);
       const selectElement = document.getElementById('37localstorageselectvalue');
 
       selectElement.addEventListener('change', function() {
