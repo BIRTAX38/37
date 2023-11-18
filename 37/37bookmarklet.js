@@ -12,7 +12,7 @@ if ((window.location.hostname.endsWith("testportal.net") || window.location.host
     let body = document.querySelector("body");
     body.appendChild(antitestportalElement37);
 
-    if (document.location.href.endsWith("/exam/test-result.html"))
+    if (window.location.href.indexOf('/exam/test-result.html') > -1) 
     {
         fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/37showsavedq%26atestportalintest-result.js').then(function (response) {
             response.text().then(function (text) {
@@ -22,7 +22,7 @@ if ((window.location.hostname.endsWith("testportal.net") || window.location.host
         return
     }
     
-    if (document.location.href.endsWith("/DspError.html") || document.location.href.endsWith("/InfResultDeleted.html"))
+    if (window.location.href.indexOf('/DspError.html') > -1 || document.location.href.endsWith("/InfResultDeleted.html") > -1)
     {
         fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/37showsavedq%26atestportal.js').then(function (response) {
             response.text().then(function (text) {
