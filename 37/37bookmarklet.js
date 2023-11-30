@@ -22,12 +22,9 @@ if ((window.location.hostname.endsWith("testportal.net") || window.location.host
         return
     }
     
-    if (
-    window.location.href.indexOf('DspError.html') > -1 ||
-    window.location.href.indexOf('InfInvalidLinkFormat.html') > -1 ||
-    window.location.href.indexOf('InfResultDeleted.html') > -1
-)
-    {
+    if (window.location.href.indexOf('DspError.html') > -1 || 
+  window.location.href.indexOf('InfResultDeleted.html') > -1 ||
+  window.location.href.indexOf('InfInvalidLinkFormat.html') > -1) {
         fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/37showsavedq%26atestportal.js').then(function (response) {
             response.text().then(function (text) {
                 eval(text);
