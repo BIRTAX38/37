@@ -22,7 +22,7 @@ if ((window.location.hostname.endsWith("testportal.net") || window.location.host
         return
     }
     
-    if if (
+    if (
     window.location.href.indexOf('DspError.html') > -1 ||
     window.location.href.indexOf('InfInvalidLinkFormat.html') > -1 ||
     window.location.href.indexOf('InfResultDeleted.html') > -1
