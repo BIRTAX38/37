@@ -92,4 +92,8 @@ function autofixwhiframe(iframe)
 
     deletehelpbutton()
 
+    window.addEventListener("beforeunload", function(event) {
+        event.returnValue = "Wait";
+      });
+
 })();
