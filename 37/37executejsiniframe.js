@@ -22,13 +22,27 @@
     }
     
     document.getElementsByTagName("html")[0].innerHTML = "";
-    document.body.style.backgroundColor = "black";
+    document.body.style.backgroundColor = "white";
     function openIframeWithInjectedCode() {
         const iframe = document.createElement('iframe');
         iframe.src = wprowadzonylink;
+        iframe.width = window.innerWidth;
+        iframe.height = window.innerHeight;
+        iframe.id = "37iframetestportal"
+        iframe.style.border = 'none';
+        document.body.appendChild(iframe);
+
+        document.body.style.margin = '0';
+        document.body.style.overflow = 'hidden';
+        /*
+        const resizeButton = document.createElement('button');
+        resizeButton.textContent = 'Napraw IFRAME';
+        resizeButton.addEventListener('click', function() {
         iframe.width = window.innerWidth - 23;
         iframe.height = window.innerHeight - 23;
-        document.body.appendChild(iframe);
+});
+        document.body.appendChild(resizeButton);
+        */
 
         iframe.addEventListener('load', () => {
             const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
@@ -46,8 +60,36 @@
                 alert(e);
             }`;
             iframeDocument.body.appendChild(script);
+            let iframedofix = document.querySelector('iframe[id="37iframetestportal"]');
+            setInterval(() => {
+                autofixwhiframe(iframedofix)
+            }, 1000);
         });
     }
+function deletehelpbutton()
+{
+    var helpbutton = document.querySelector('iframe[id="launcher"]');
+if (helpbutton) {
+  helpbutton.remove();
+} else {
+    /*
+  console.log('Element nie został znaleziony.');
+  */
+  setTimeout(() => {
+    deletehelpbutton()
+  }, 1000);
+}
+}
+
+function autofixwhiframe(iframe)
+
+{
+    iframe.width = window.innerWidth;
+    iframe.height = window.innerHeight;
+}
 
     openIframeWithInjectedCode();
+
+    deletehelpbutton()
+
 })();
