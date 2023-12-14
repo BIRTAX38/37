@@ -1,6 +1,6 @@
 function utworzSelectZKluczamiLocalStorage() {
     const klucze = Object.keys(localStorage);
-    const kluczeWzor = klucze.filter(klucz => /^\d{4}-\d{2}-\d{2}$/.test(klucz));
+    const kluczeWzor = klucze.filter(klucz => /^\d{4}-\d{2}-\d{2}( \w+)?$/.test(klucz));
   
     if (kluczeWzor.length === 0) {
       console.log('Brak kluczy o formacie ****-**-** w localStorage.');
@@ -66,17 +66,17 @@ function utworzSelectZKluczamiLocalStorage() {
             var style = document.createElement('style');
             style.appendChild(document.createTextNode(css));
             document.head.appendChild(style);
-  
+            
   
   
           data.forEach(obj => {
             const container = document.createElement('div');
-  
+            const datatestu = selectedValue.replace(/(^\d{4}-\d{2}-\d{2}) .*/, '$1');
   
             Object.entries(obj).forEach(([key, value]) => {
               if (key === "Nazwa testu") {
                 const h1 = document.createElement('h1');
-                h1.textContent = `${key}: ${value} ${selectedValue}`;
+                h1.textContent = `${key}: ${value} ${datatestu}`;
                 container.appendChild(h1);
            } else if (key === "questionHTML") {
                 numerpytania = numerpytania + 1; // Update numerpytania without 'let'
