@@ -1,15 +1,15 @@
 const elements = document.querySelectorAll('.timer-tile-properties-container .mdc-property-value');
-
+const testname = document.querySelector('.test-name').innerText;
 
 if (elements.length > 0) {
   const lastElementContent = elements[elements.length - 1].textContent.trim();
 
 
-  if (localStorage.getItem(lastElementContent)) {
+  if (localStorage.getItem(`${lastElementContent} ${testname}`)) {
     console.log('Klucz istnieje w local storage.');
 
 
-    const dataFromLocalStorage = localStorage.getItem(lastElementContent);
+    const dataFromLocalStorage = localStorage.getItem(`${lastElementContent} ${testname}`);
 
 
     if (dataFromLocalStorage) {
