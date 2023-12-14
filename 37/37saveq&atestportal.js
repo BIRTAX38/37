@@ -1,6 +1,6 @@
 
 // Funkcja do formatowania odpowiedzi w żądany sposób
-
+var testname = document.querySelector('.test-name').innerText;
 
 
 function formatAnswers(answersArray) {
@@ -14,10 +14,10 @@ function checkIfDataExists(questionHTML, answersArray) {
         month: '2-digit',
         day: '2-digit'
       }).replace(/\//g, '-');
-    const existingData = localStorage.getItem(today);
+    const existingDataandTestname =  localStorage.getItem(`${today} ${testname}`);
 
-    if (existingData) {
-        const jsonData = JSON.parse(existingData);
+    if (existingDataandTestname) {
+        const jsonData = JSON.parse(existingDataandTestname);
 
         for (const data of jsonData) {
             if (data.questionHTML === questionHTML && arraysEqual(data.answers, answersArray)) {
@@ -58,17 +58,17 @@ if (window.location.href.includes("LoadTestStart.html") && testName) {
 
 
     // Sprawdzenie czy dana data jest już w local storage
-    const existingData = localStorage.getItem(today);
-    if (!existingData) {
-        localStorage.setItem(today, JSON.stringify([{ "Nazwa testu": testName }]));
+    const existingDataandTestname = localStorage.getItem(`${today} ${testname}`);
+    if (!existingDataandTestname) {
+        localStorage.setItem(`${today} ${testname}`, JSON.stringify([{ "Nazwa testu": testName }]));
         console.log(`Dodano do local storage: ${today} - ${testName}`);
     } else {
-        const jsonData = JSON.parse(existingData);
+        const jsonData = JSON.parse(existingDataandTestname);
         const existingTestNameData = jsonData.find(data => data["Nazwa testu"] === testName);
         
         if (!existingTestNameData) {
             jsonData.unshift({ "Nazwa testu": testName });
-            localStorage.setItem(today, JSON.stringify(jsonData));
+            localStorage.setItem(`${today} ${testname}`, JSON.stringify(jsonData));
             console.log(`Dodano do local storage: ${today} - ${testName}`);
         } else {
             console.log(`Dla daty ${today} dane już istnieją w local storage`);
@@ -107,13 +107,13 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
             const formattedAnswers = formatAnswers(answersArray);
             const newData = { questionHTML: questionHTML, answers: answersArray };
 
-            const existingData = localStorage.getItem(today);
-            if (existingData) {
-                const jsonData = JSON.parse(existingData);
+            const existingDataandTestname = localStorage.getItem(`${today} ${testname}`);
+            if (existingDataandTestname) {
+                const jsonData = JSON.parse(existingDataandTestname);
                 jsonData.push(newData);
-                localStorage.setItem(today, JSON.stringify(jsonData));
+                localStorage.setItem(`${today} ${testname}`, JSON.stringify(jsonData));
             } else {
-                localStorage.setItem(today, JSON.stringify([{ "Nazwa testu": testName }, newData]));
+                localStorage.setItem(`${today} ${testname}`, JSON.stringify([{ "Nazwa testu": testName }, newData]));
             }
 
             console.log(`Dodano pytanie i odpowiedzi do local storage dla daty ${today}`);
