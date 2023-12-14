@@ -21,10 +21,10 @@ if (elements.length > 0) {
         questionsListTopBar.innerHTML = ''; // Wyczyść zawartość elementu
         questionsListTopBar.style.display = 'block';
         questionsListTopBar.style.fontFamily = '"Aktiv Grotesk", sans-serif';
-
+        let numerpytania = 0
         
 //        var css = '.questions-list-top-bar img { max-width: 100%; height: auto; }';
-        var css = '.questions-list-top-bar img { max-width: fit-content; height: auto; }';
+        var css = '.questions-list-top-bar img { max-width: -webkit-fill-available; height: auto; }';
         var style = document.createElement('style');
         style.appendChild(document.createTextNode(css));
         document.head.appendChild(style);
@@ -41,8 +41,9 @@ if (elements.length > 0) {
               h1.textContent = `${key}: ${value}`;
               container.appendChild(h1);
             } else if (key === "questionHTML") {
+              numerpytania = numerpytania + 1; // Update numerpytania without 'let'
               const p = document.createElement('p');
-              p.innerHTML = `<strong>Pytanie:</strong> ${value}`;
+              p.innerHTML = `<h2>Pytanie ${numerpytania}:</h2> ${value}`;
               container.appendChild(p);
             } else  if (key === "answers") {
                 
