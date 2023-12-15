@@ -76,8 +76,8 @@ function utworzSelectZKluczamiLocalStorage() {
             copytoclipboard.style.position = 'absolute';
             logincard.appendChild(copytoclipboard);
             copytoclipboard.addEventListener('click', () => {
-            alert("Skopiowano")
               navigator.clipboard.writeText(`Object.entries({"${selectedValue}":${JSON.stringify(localStorage.getItem(`${selectedValue}`))}}).forEach(([k,v])=>localStorage.setItem(k,v))`);
+              alert("Skopiowano")
             });
   
   
