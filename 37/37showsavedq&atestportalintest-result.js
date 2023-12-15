@@ -38,7 +38,7 @@ if (elements.length > 0) {
         copytoclipboard.addEventListener('click', () => {
           //navigator.clipboard.writeText(`Object.entries({"${selectedValue}":${JSON.stringify(localStorage.getItem(`${selectedValue}`))}}).forEach(([k,v])=>localStorage.setItem(k,v))`);
                         const input = document.createElement('input');
-          input.value = (`avascript:Object.entries({"${selectedValue}":${JSON.stringify(localStorage.getItem(`${selectedValue}`))}}).forEach(([k,v])=>localStorage.setItem(k,v))`);
+          input.value = (`avascript:Object.entries({"${lastElementContent} ${testname}":${JSON.stringify(localStorage.getItem(`${lastElementContent} ${testname}`))}}).forEach(([k,v])=>localStorage.setItem(k,v))`);
           document.body.appendChild(input);
           input.focus();
           input.select();
