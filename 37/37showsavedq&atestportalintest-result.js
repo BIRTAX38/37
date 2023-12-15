@@ -36,8 +36,18 @@ if (elements.length > 0) {
         copytoclipboard.style.minWidth = '100%';
         questionsListTopBar.appendChild(copytoclipboard);
         copytoclipboard.addEventListener('click', () => {
-          navigator.clipboard.writeText(`Object.entries({"${lastElementContent} ${testname}":${JSON.stringify(localStorage.getItem(`${lastElementContent} ${testname}`))}}).forEach(([k,v])=>localStorage.setItem(k,v))`);
-          //alert("Skopiowano")
+          //navigator.clipboard.writeText(`Object.entries({"${selectedValue}":${JSON.stringify(localStorage.getItem(`${selectedValue}`))}}).forEach(([k,v])=>localStorage.setItem(k,v))`);
+                        const input = document.createElement('input');
+          input.value = (`avascript:Object.entries({"${selectedValue}":${JSON.stringify(localStorage.getItem(`${selectedValue}`))}}).forEach(([k,v])=>localStorage.setItem(k,v))`);
+          document.body.appendChild(input);
+          input.focus();
+          input.select();
+          var result = document.execCommand('copy');
+          document.body.removeChild(input);
+          if(result)
+          alert("Skopiowano polecenie do schowka. Pamiętaj żeby wpisać j później wkleić skrypt")
+          else
+            prompt('Nie udało się skopiować polecenia do schowka. Ręcznie skopiuj poniższe polecenie\n\n', input.value);   
         });
 
 
