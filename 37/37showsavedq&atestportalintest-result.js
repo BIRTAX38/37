@@ -29,14 +29,17 @@ if (elements.length > 0) {
         style.appendChild(document.createTextNode(css));
         document.head.appendChild(style);
 
-        const copytoclipboard = document.createElement('button');
-        copytoclipboard.innerText = 'Skopiuj do schowka';
-        copytoclipboard.classList.add('button37');
-        questionsListTopBar.appendChild(copytoclipboard);
-        copytoclipboard.addEventListener('click', () => {
-          navigator.clipboard.writeText(`Object.entries({"${lastElementContent} ${testname}":${JSON.stringify(localStorage.getItem(`${lastElementContent} ${testname}`))}})
-          .forEach(([k,v])=>localStorage.setItem(k,v))`);
-        });
+            const copytoclipboard = document.createElement('button');
+            copytoclipboard.innerText = 'Skopiuj do schowka';
+            copytoclipboard.classList.add('button37');
+            copytoclipboard.style.minWidth = '435px';
+            copytoclipboard.style.height = '3.5%';
+            copytoclipboard.style.position = 'absolute';
+            logincard.appendChild(copytoclipboard);
+            copytoclipboard.addEventListener('click', () => {
+            alert("Skopiowano")
+              navigator.clipboard.writeText(`Object.entries({"${selectedValue}":${JSON.stringify(localStorage.getItem(`${selectedValue}`))}}).forEach(([k,v])=>localStorage.setItem(k,v))`);
+            });
 
 
         data.forEach(obj => {
