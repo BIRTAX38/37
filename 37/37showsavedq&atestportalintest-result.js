@@ -17,14 +17,14 @@ if (elements.length > 0) {
 
 
       if (Array.isArray(data)) {
-        const questionsListTopBar = document.querySelector('.questions-list-top-bar');
+        const questionsListTopBar = document.querySelector('.hidden-info');
         questionsListTopBar.innerHTML = ''; // Wyczyść zawartość elementu
         questionsListTopBar.style.display = 'block';
         questionsListTopBar.style.fontFamily = '"Aktiv Grotesk", sans-serif';
         let numerpytania = 0
         
-//        var css = '.questions-list-top-bar img { max-width: 100%; height: auto; }';
-        var css = '.questions-list-top-bar img { max-width: -webkit-fill-available; height: auto; }';
+//        var css = '.hidden-info img { max-width: 100%; height: auto; }';
+        var css = '.hidden-info img { max-width: -webkit-fill-available; height: auto; }';
         var style = document.createElement('style');
         style.appendChild(document.createTextNode(css));
         document.head.appendChild(style);
