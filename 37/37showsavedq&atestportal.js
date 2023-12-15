@@ -83,7 +83,7 @@ function utworzSelectZKluczamiLocalStorage() {
               var result = document.execCommand('copy');
               document.body.removeChild(input);
               if(result)
-              alert("Skopiowano polecenie do schowka. Pamiętaj żeby wpisać j później wkleić skrypt")
+              alert("Skopiowano polecenie do schowka. Pamiętaj żeby wpisać literkę j przed wklejeniem polecenia")
               else
                 prompt('Nie udało się skopiować polecenia do schowka. Ręcznie skopiuj poniższe polecenie\n\n', input.value);   
             });
