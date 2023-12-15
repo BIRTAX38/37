@@ -37,7 +37,7 @@ if (elements.length > 0) {
         questionsListTopBar.appendChild(copytoclipboard);
         copytoclipboard.addEventListener('click', () => {
           navigator.clipboard.writeText(`Object.entries({"${lastElementContent} ${testname}":${JSON.stringify(localStorage.getItem(`${lastElementContent} ${testname}`))}}).forEach(([k,v])=>localStorage.setItem(k,v))`);
-          alert("Skopiowano")
+          //alert("Skopiowano")
         });
 
 
