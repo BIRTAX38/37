@@ -71,7 +71,7 @@ function utworzSelectZKluczamiLocalStorage() {
             const copytoclipboard = document.createElement('button');
             copytoclipboard.innerText = 'Skopiuj do schowka';
             copytoclipboard.classList.add('button37');
-            copytoclipboard.style.minWidth = '435px';
+            copytoclipboard.style.minWidth = '28.7%';
             copytoclipboard.style.height = '3.5%';
             copytoclipboard.style.position = 'absolute';
             logincard.appendChild(copytoclipboard);
@@ -85,7 +85,7 @@ function utworzSelectZKluczamiLocalStorage() {
               var result = document.execCommand('copy');
               document.body.removeChild(input);
               if(result)
-              prompt('Nie udało się skopiować polecenia do schowka. Ręcznie skopiuj poniższe polecenie\n\n', input.value);   
+              alert("Skopiowano polecenie do schowka. Pamiętaj żeby wpisać j później wkleić skrypt")
               else
                 prompt('Nie udało się skopiować polecenia do schowka. Ręcznie skopiuj poniższe polecenie\n\n', input.value);   
             });
