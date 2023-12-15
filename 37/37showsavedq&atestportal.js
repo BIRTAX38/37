@@ -71,9 +71,7 @@ function utworzSelectZKluczamiLocalStorage() {
             const copytoclipboard = document.createElement('button');
             copytoclipboard.innerText = 'Skopiuj do schowka';
             copytoclipboard.classList.add('button37');
-            copytoclipboard.style.minWidth = '28.7%';
-            copytoclipboard.style.height = '3.5%';
-            copytoclipboard.style.position = 'absolute';
+            copytoclipboard.style.minWidth = '-webkit-fill-available';
             logincard.appendChild(copytoclipboard);
             copytoclipboard.addEventListener('click', () => {
               //navigator.clipboard.writeText(`Object.entries({"${selectedValue}":${JSON.stringify(localStorage.getItem(`${selectedValue}`))}}).forEach(([k,v])=>localStorage.setItem(k,v))`);
