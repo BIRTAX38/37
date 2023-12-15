@@ -76,8 +76,18 @@ function utworzSelectZKluczamiLocalStorage() {
             copytoclipboard.style.position = 'absolute';
             logincard.appendChild(copytoclipboard);
             copytoclipboard.addEventListener('click', () => {
-              document.execCommand(`Object.entries({"${selectedValue}":${JSON.stringify(localStorage.getItem(`${selectedValue}`))}}).forEach(([k,v])=>localStorage.setItem(k,v))`);
-              alert("Skopiowano")
+              //navigator.clipboard.writeText(`Object.entries({"${selectedValue}":${JSON.stringify(localStorage.getItem(`${selectedValue}`))}}).forEach(([k,v])=>localStorage.setItem(k,v))`);
+                            const input = document.createElement('input');
+              input.value = (`avascript:Object.entries({"${selectedValue}":${JSON.stringify(localStorage.getItem(`${selectedValue}`))}}).forEach(([k,v])=>localStorage.setItem(k,v))`);
+              document.body.appendChild(input);
+              input.focus();
+              input.select();
+              var result = document.execCommand('copy');
+              document.body.removeChild(input);
+              if(result)
+              prompt('Nie udało się skopiować polecenia do schowka. Ręcznie skopiuj poniższe polecenie\n\n', input.value);   
+              else
+                prompt('Nie udało się skopiować polecenia do schowka. Ręcznie skopiuj poniższe polecenie\n\n', input.value);   
             });
   
   
