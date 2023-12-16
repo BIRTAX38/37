@@ -8,7 +8,7 @@
         }
         return;
     }
-    var wprowadzonylink = prompt("Wprowadź link do testu:");
+    var wprowadzonylink = prompt("Wprowadź link do testu:\n");
     if (!(wprowadzonylink.includes("testportal.net") || wprowadzonylink.includes("testportal.pl"))) {
         alert("Niepoprawny adres url (link)")
     }
@@ -16,7 +16,7 @@
     console.log(adresurl);
     if (!wprowadzonylink.includes(adresurl)) {
         let adrestopenwindow = new URL(wprowadzonylink).origin;
-        alert("37: Zostaniesz przekierowany na inną stronę, ponieważ skrypt nie może zostać wykonany. Wykonaj skrypt po przekierowaniu na inną stronę.");
+        alert("37:Zostaniesz przekierowany na inną stronę, ponieważ skrypt nie może zostać wykonany. Wykonaj skrypt po przekierowaniu na inną stronę.");
         window.location.href = adrestopenwindow;
         console.log(domena);
     }
@@ -47,7 +47,15 @@
         iframe.addEventListener('load', () => {
             const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
             const script = iframeDocument.createElement('script');
-            script.textContent = `/*alert("REFRESHED");*/
+            script.textContent = `
+/*alert("REFRESHED");*/
+/////////////////////////////////////////////////ANTIBACKPAGE/////////////////////////////////////////////////
+history.pushState(null, null, document.URL);
+window.addEventListener('popstate', function () {
+    history.pushState(null, null, document.URL);
+});
+/////////////////////////////////////////////////ANTIBACKPAGE/////////////////////////////////////////////////
+
             try {    
                 const originalTest = RegExp.prototype.test;    
                 RegExp.prototype.test = function(s) {        
