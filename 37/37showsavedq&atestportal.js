@@ -135,7 +135,11 @@ function start() {
           //location.reload();
         });
 /////////////////////////////////////////////////////////////////////////UPLOADTESTS/////////////////////////////////////////////////////////////////////////
-
+//        var css = '.login-card img { max-width: 100%; height: auto; }';
+var css = '.login-logo .container { padding: 0 10px; }';
+var style = document.createElement('style');
+style.appendChild(document.createTextNode(css));
+document.head.appendChild(style);
 
 
 
