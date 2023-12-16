@@ -8,7 +8,8 @@ function start() {
     uploadtest = confirm("Czy chciałbyś przesłać test ze schowka?")
     if (uploadtest) 
     {
-        const uploadedtest = prompt("Wklej tutaj test który skopiowałeś do schowka")
+        //const uploadedtest = prompt("Wklej tutaj test który skopiowałeś do schowka")
+        let uploadedtest = navigator.clipboard.readText();
         eval(`Object.entries(${uploadedtest}).forEach(([k,v])=>localStorage.setItem(k,v))`)
         start();
         //location.reload();
@@ -129,7 +130,8 @@ function start() {
       
         // Dodanie zdarzenia do przycisku
         buttonuploadtest.addEventListener('click', function() {
-          const uploadedtest = prompt("Wpisz tutaj plik JSON (To co skopiowałeś do schowka)")
+          //const uploadedtest = prompt("Wpisz tutaj testy które skopiowałeś do schowka")
+          let uploadedtest = navigator.clipboard.readText();
           eval(`Object.entries(${uploadedtest}).forEach(([k,v])=>localStorage.setItem(k,v))`)
           start();
           //location.reload();
@@ -277,4 +279,3 @@ document.head.appendChild(style);
 }
 
 start();
-
