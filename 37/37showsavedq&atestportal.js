@@ -15,6 +15,7 @@ function start() {
                 start();
                 //location.reload();
             } catch (error) {
+              alert('Nie udało się skopiować testu ze schowka unlucky\nMusisz zezwolić na dostęp do schowka');
                 console.error("Error reading clipboard:", error);
             }
         };
@@ -147,6 +148,7 @@ function start() {
                 start();
                 //location.reload();
             } catch (error) {
+              alert('Nie udało się skopiować testu ze schowka unlucky\nMusisz zezwolić na dostęp do schowka');
                 console.error("Error reading clipboard:", error);
             }
         };
