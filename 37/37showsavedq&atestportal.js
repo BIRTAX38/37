@@ -28,7 +28,7 @@ function start() {
   
     const buttoncopytests = document.createElement('button');
     buttoncopytests.innerHTML = 'Skopiuj wszystkie<br>testy do schowka';
-  
+    buttoncopytests.style.maxHeight = '35px';
     buttoncopytestscontainerDiv.appendChild(buttoncopytests);
     buttoncopytestsloginLogoDiv.appendChild(buttoncopytestscontainerDiv);
   
@@ -113,6 +113,7 @@ function start() {
         buttonuploadtestcontainerDiv.className = 'container';
       
         const buttonuploadtest = document.createElement('button');
+        buttonuploadtest.style.maxHeight = '35px';
         buttonuploadtest.innerHTML = 'Prześlij testy<br>ze schowka';
       
         buttonuploadtestcontainerDiv.appendChild(buttonuploadtest);
