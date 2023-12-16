@@ -31,7 +31,7 @@ if (elements.length > 0) {
 
 
         const copytoclipboard = document.createElement('button');
-        copytoclipboard.innerText = 'Skopiuj do schowka';
+        copytoclipboard.innerText = 'Skopiuj test do schowka';
         copytoclipboard.classList.add('button37');
         copytoclipboard.style.minWidth = '100%';
         questionsListTopBar.appendChild(copytoclipboard);
