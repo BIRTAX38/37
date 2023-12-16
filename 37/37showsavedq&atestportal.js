@@ -5,15 +5,23 @@ function start() {
   if (kluczeWzor.length === 0) {
     console.log('Brak kluczy o formacie ****-**-** w localStorage.');
     alert("Brak zapisanych testów")
-    uploadtest = confirm("Czy chciałbyś przesłać test ze schowka?")
-    if (uploadtest) 
-    {
-        //const uploadedtest = prompt("Wklej tutaj test który skopiowałeś do schowka")
-        let uploadedtest = navigator.clipboard.readText();
-        eval(`Object.entries(${uploadedtest}).forEach(([k,v])=>localStorage.setItem(k,v))`)
-        start();
-        //location.reload();
+    uploadtest = confirm("Czy chciałbyś przesłać test ze schowka?");
+    if (uploadtest) {
+        const readClipboard = async () => {
+            try {
+                let uploadedtest = await navigator.clipboard.readText();
+                Object.entries(JSON.parse(uploadedtest)).forEach(([k,v]) => localStorage.setItem(k,v));
+                alert("Wszystkie testy ze schowka zostały przesłane.")
+                start();
+                //location.reload();
+            } catch (error) {
+                console.error("Error reading clipboard:", error);
+            }
+        };
+    
+        readClipboard();
     }
+    
   } else {
     console.log('Klucze o formacie ****-**-** w localStorage:');
 
@@ -65,7 +73,7 @@ function start() {
         if(result)
         alert('Wszystkie testy zostały skopiowane do schowka.');
         else
-          prompt('Nie udało się skopiować testów do schowka. Ręcznie skopiuj testy\n\n', tempTextArea.value);   
+          alert('Nie udało się skopiować testów do schowka F\nMusisz zezwolić na dostęp do schowka');   
     });
 /////////////////////////////////////////////////////////////////////////COPYTESTS/////////////////////////////////////////////////////////////////////////
 
@@ -131,8 +139,19 @@ function start() {
         // Dodanie zdarzenia do przycisku
         buttonuploadtest.addEventListener('click', function() {
           //const uploadedtest = prompt("Wpisz tutaj testy które skopiowałeś do schowka")
-          let uploadedtest = navigator.clipboard.readText();
-          eval(`Object.entries(${uploadedtest}).forEach(([k,v])=>localStorage.setItem(k,v))`)
+          const readClipboard = async () => {
+            try {
+                let uploadedtest = await navigator.clipboard.readText();
+                Object.entries(JSON.parse(uploadedtest)).forEach(([k,v]) => localStorage.setItem(k,v));
+                alert("Wszystkie testy ze schowka zostały przesłane.")
+                start();
+                //location.reload();
+            } catch (error) {
+                console.error("Error reading clipboard:", error);
+            }
+        };
+    
+        readClipboard();
           start();
           //location.reload();
         });
@@ -203,7 +222,7 @@ document.head.appendChild(style);
               if(result)
               alert('Wszystkie testy zostały skopiowane do schowka.');
               else
-                prompt('Nie udało się skopiować testu do schowka. Ręcznie skopiuj test\n\n', input.value);   
+                alert('Nie udało się skopiować testu ze schowka unlucky\nMusisz zezwolić na dostęp do schowka');   
           });
 
 
