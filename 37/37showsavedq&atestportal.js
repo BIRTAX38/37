@@ -1,6 +1,8 @@
 function start() {
   const klucze = Object.keys(localStorage);
-  const kluczeWzor = klucze.filter(klucz => /^\d{4}-\d{2}-\d{2}( \w+)?$/.test(klucz));
+  const kluczeWzor = klucze.filter(klucz => /^\d{4}-\d{2}-\d{2}( .+)?$/.test(klucz));
+
+
 
   if (kluczeWzor.length === 0) {
     console.log('Brak kluczy o formacie ****-**-** w localStorage.');
@@ -93,6 +95,7 @@ function start() {
     defaultOption.text = 'Wybierz...';
     defaultOption.disabled = true;
     defaultOption.selected = true;
+    select.style.maxWidth = '120px';
     select.appendChild(defaultOption);
 
     kluczeWzor.forEach(klucz => {
