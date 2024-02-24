@@ -1,14 +1,14 @@
-
 // Funkcja do formatowania odpowiedzi w żądany sposób
-var testname = document.querySelector('.test-name').innerText;
-
-
-function formatAnswers(answersArray) {
-    return `["Odpowiedzi: ${answersArray.join(', ')}"]`;
+function formatAnswers(answersArray, hasRadio) {
+    let formattedAnswers = `["Odpowiedzi: ${answersArray.join(', ')}"]`;
+    if (hasRadio) {
+        formattedAnswers += ' [Jednokrotny wybór]';
+    }
+    return formattedAnswers;
 }
 
 // Funkcja sprawdzająca, czy pytanie i odpowiedzi już istnieją w local storage
-function checkIfDataExists(questionHTML, answersArray) {
+function checkIfDataExists(questionHTML, answersArray, hasRadio) {
     const today = new Date().toLocaleDateString('en-CA', {
         year: 'numeric',
         month: '2-digit',
@@ -20,7 +20,7 @@ function checkIfDataExists(questionHTML, answersArray) {
         const jsonData = JSON.parse(existingDataandTestname);
 
         for (const data of jsonData) {
-            if (data.questionHTML === questionHTML && arraysEqual(data.answers, answersArray)) {
+            if (data.questionHTML === questionHTML && arraysEqual(data.answers, answersArray) && data.hasRadio === hasRadio) {
                 return true;
             }
         }
@@ -85,6 +85,7 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
         const questionHTML = questionEssenceElement.outerHTML; // Kopiowanie całego elementu HTML
         const answerContainers = questionAnswers.querySelectorAll('.answer_container');
         const answersArray = [];
+        let questionHasRadio = false;
 
         answerContainers.forEach((answerContainer) => {
             const answerBody = answerContainer.querySelector('.answer_body');
@@ -92,6 +93,9 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
                 const answerText = answerBody.querySelector('p').textContent.trim();
                 if (!answerText.includes('DDG | Google')) {
                     answersArray.push(answerText);
+                    if (answerContainer.querySelector('.mdc-radio')) {
+                        questionHasRadio = true;
+                    }
                 }
             }
         });
@@ -103,9 +107,9 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
           }).replace(/\//g, '-');
 
         // Sprawdzenie czy pytanie i odpowiedzi już istnieją w local storage
-        if (!checkIfDataExists(questionHTML, answersArray)) {
-            const formattedAnswers = formatAnswers(answersArray);
-            const newData = { questionHTML: questionHTML, answers: answersArray };
+        if (!checkIfDataExists(questionHTML, answersArray, questionHasRadio)) {
+            const formattedAnswers = formatAnswers(answersArray, questionHasRadio);
+            const newData = { questionHTML: questionHTML, answers: answersArray, hasRadio: questionHasRadio };
 
             const existingDataandTestname = localStorage.getItem(`${today} ${testname}`);
             if (existingDataandTestname) {
@@ -122,7 +126,4 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
         }
     }
 }
-
-
-
-      
+//
