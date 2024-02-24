@@ -3,6 +3,7 @@
 var testname = document.querySelector('.test-name').innerText;
 
 
+// Funkcja do formatowania odpowiedzi w żądany sposób
 function formatAnswers(answersArray) {
     return `["Odpowiedzi: ${answersArray.join(', ')}"]`;
 }
@@ -13,8 +14,8 @@ function checkIfDataExists(questionHTML, answersArray) {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit'
-      }).replace(/\//g, '-');
-    const existingDataandTestname =  localStorage.getItem(`${today} ${testname}`);
+    }).replace(/\//g, '-');
+    const existingDataandTestname = localStorage.getItem(`${today} ${testname}`);
 
     if (existingDataandTestname) {
         const jsonData = JSON.parse(existingDataandTestname);
@@ -34,13 +35,13 @@ function arraysEqual(arr1, arr2) {
     if (arr1.length !== arr2.length) {
         return false;
     }
-    
+
     for (let i = 0; i < arr1.length; i++) {
         if (arr1[i] !== arr2[i]) {
             return false;
         }
     }
-    
+
     return true;
 }
 
@@ -54,7 +55,7 @@ if (window.location.href.includes("LoadTestStart.html") && testName) {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit'
-      }).replace(/\//g, '-');
+    }).replace(/\//g, '-');
 
 
     // Sprawdzenie czy dana data jest już w local storage
@@ -65,7 +66,7 @@ if (window.location.href.includes("LoadTestStart.html") && testName) {
     } else {
         const jsonData = JSON.parse(existingDataandTestname);
         const existingTestNameData = jsonData.find(data => data["Nazwa testu"] === testName);
-        
+
         if (!existingTestNameData) {
             jsonData.unshift({ "Nazwa testu": testName });
             localStorage.setItem(`${today} ${testname}`, JSON.stringify(jsonData));
@@ -77,7 +78,7 @@ if (window.location.href.includes("LoadTestStart.html") && testName) {
 }
 
 // Sprawdzenie czy aktualny adres URL zawiera DoStartTest.html lub DoTestQuestion.html
-if ((window.location.href.includes("DoStartTest.html") || window.location.href.includes("DoTestQuestion.html")) || window.location.href.includes("LoadQuestion.html") && testName) {
+if ((window.location.href.includes("DoStartTest.html") || window.location.href.includes("DoTestQuestion.html") || window.location.href.includes("LoadQuestion.html")) && testName) {
     const questionEssenceElement = document.querySelector('.question_essence');
     const questionAnswers = document.querySelector('.question_answers');
 
@@ -85,6 +86,7 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
         const questionHTML = questionEssenceElement.outerHTML; // Kopiowanie całego elementu HTML
         const answerContainers = questionAnswers.querySelectorAll('.answer_container');
         const answersArray = [];
+        let answerType = "";
 
         answerContainers.forEach((answerContainer) => {
             const answerBody = answerContainer.querySelector('.answer_body');
@@ -96,16 +98,39 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
             }
         });
 
+        const hiddenInputElement = document.querySelector('input[name="givenAnswer.questionType"][type="hidden"]');
+        if (hiddenInputElement) {
+            const questionTypeValue = hiddenInputElement.value;
+            if (questionTypeValue === "SINGLE_ANSWER") {
+                answerType = "[Jednokrotny wybór]";
+            } else if (questionTypeValue === "MULTI_ANSWER") {
+                answerType = "[Wielokrotny wybór]";
+            }
+            else if (questionTypeValue === "DESCRIPTIVE") {
+                answerType = "[Opisowe]";
+            }
+            else if (questionTypeValue === "TRUE_FALSE") {
+                answerType = "[Prawda/fałsz]";
+            }
+            else if (questionTypeValue === "SHORT_ANSWER") {
+                answerType = "[Krótka odpowiedź]";
+            }
+            else if (questionTypeValue === "SURVEY") {
+                answerType = "[Ankietowe]";
+            }
+        }
+        
+
         const today = new Date().toLocaleDateString('en-CA', {
             year: 'numeric',
             month: '2-digit',
             day: '2-digit'
-          }).replace(/\//g, '-');
+        }).replace(/\//g, '-');
 
         // Sprawdzenie czy pytanie i odpowiedzi już istnieją w local storage
         if (!checkIfDataExists(questionHTML, answersArray)) {
             const formattedAnswers = formatAnswers(answersArray);
-            const newData = { questionHTML: questionHTML, answers: answersArray };
+            const newData = { questionHTML: questionHTML, answerType: answerType, answers: answersArray };
 
             const existingDataandTestname = localStorage.getItem(`${today} ${testname}`);
             if (existingDataandTestname) {
@@ -122,7 +147,3 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
         }
     }
 }
-
-
-
-      
