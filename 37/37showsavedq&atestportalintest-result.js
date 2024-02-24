@@ -61,43 +61,38 @@ if (elements.length > 0) {
               h1.textContent = `${key}: ${value}`;
               container.appendChild(h1);
             } else if (key === "questionHTML") {
-              numerpytania = numerpytania + 1; // Update numerpytania without 'let'
+              numerpytania = numerpytania + 1;
               const p = document.createElement('p');
-              p.innerHTML = `<h2>Pytanie ${numerpytania}:</h2> ${value}`;
+              p.innerHTML = `<h3>Pytanie ${numerpytania}:</h3> ${value}`;
               container.appendChild(p);
-            } else  if (key === "answers") {
-                
+            } else if (key === "answers") {
+              const answerType = obj["answerType"];
               const p = document.createElement('p');
-              p.innerHTML = `<strong>Odpowiedzi:</strong>`;
-
+              p.innerHTML = `<h3>Odpowiedzi: ${answerType}</h3>`;
 
               if (Array.isArray(value)) {
-                const ul = document.createElement('ul');
-                value.forEach(answer => {
-                  const li = document.createElement('li');
-                  li.textContent = answer;
-                  ul.appendChild(li);
-                });
-                p.appendChild(ul);
+                  const ul = document.createElement('ul');
+                  value.forEach(answer => {
+                      const li = document.createElement('li');
+                      li.textContent = answer;
+                      ul.appendChild(li);
+                  });
+                  p.appendChild(ul);
               } else {
-                const div = document.createElement('div');
-                div.innerHTML = value;
-                p.appendChild(div);
+                  const div = document.createElement('div');
+                  div.innerHTML = value;
+                  p.appendChild(div);
               }
-
 
               container.appendChild(p);
             } else {
-                const p = document.createElement('p');
-                p.innerHTML = `<strong>${value}</strong> ${value}`;
+              const p = document.createElement('p');
+              p.innerHTML = `<strong>${value}</strong> ${value}`;
             }
           });
 
-
           questionsListTopBar.appendChild(container);
 
-
-          // Dodaj odstęp między poszczególnymi elementami
           const spacer = document.createElement('hr');
           questionsListTopBar.appendChild(spacer);
         });
@@ -113,4 +108,3 @@ if (elements.length > 0) {
 } else {
   console.log('Nie znaleziono żadnych elementów z tą klasą.');
 }
-
