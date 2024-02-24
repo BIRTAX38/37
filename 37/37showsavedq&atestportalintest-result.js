@@ -70,6 +70,10 @@ if (elements.length > 0) {
               const p = document.createElement('p');
               p.innerHTML = `<h3>Odpowiedzi: ${answerType}</h3>`;
 
+              if (!value || value.length === 0) {
+                value = "<h4>(Pytanie otwarte)<h4>";
+            }
+
               if (Array.isArray(value)) {
                   const ul = document.createElement('ul');
                   value.forEach(answer => {
