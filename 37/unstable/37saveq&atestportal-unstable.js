@@ -86,7 +86,7 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
         const questionHTML = questionEssenceElement.outerHTML; // Kopiowanie całego elementu HTML
         const answerContainers = questionAnswers.querySelectorAll('.answer_container');
         const answersArray = [];
-        let AnswerType = "";
+        let answerType = "";
 
         answerContainers.forEach((answerContainer) => {
             const answerBody = answerContainer.querySelector('.answer_body');
@@ -102,21 +102,21 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
         if (hiddenInputElement) {
             const questionTypeValue = hiddenInputElement.value;
             if (questionTypeValue === "SINGLE_ANSWER") {
-                AnswerType = "[Jednokrotny wybór]";
+                answerType = "[Jednokrotny wybór]";
             } else if (questionTypeValue === "MULTI_ANSWER") {
-                AnswerType = "[Wielokrotny wybór]";
+                answerType = "[Wielokrotny wybór]";
             }
             else if (questionTypeValue === "DESCRIPTIVE") {
-                AnswerType = "[Opisowe]";
+                answerType = "[Opisowe]";
             }
             else if (questionTypeValue === "TRUE_FALSE") {
-                AnswerType = "[Prawda/fałsz]";
+                answerType = "[Prawda/fałsz]";
             }
             else if (questionTypeValue === "SHORT_ANSWER") {
-                AnswerType = "[Krótka odpowiedź]";
+                answerType = "[Krótka odpowiedź]";
             }
             else if (questionTypeValue === "SURVEY") {
-                AnswerType = "[Ankietowe]";
+                answerType = "[Ankietowe]";
             }
         }
         
@@ -130,7 +130,7 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
         // Sprawdzenie czy pytanie i odpowiedzi już istnieją w local storage
         if (!checkIfDataExists(questionHTML, answersArray)) {
             const formattedAnswers = formatAnswers(answersArray);
-            const newData = { questionHTML: questionHTML, AnswerType: AnswerType, answers: answersArray };
+            const newData = { questionHTML: questionHTML, answerType: answerType, answers: answersArray };
 
             const existingDataandTestname = localStorage.getItem(`${today} ${testname}`);
             if (existingDataandTestname) {
