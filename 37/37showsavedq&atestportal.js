@@ -155,7 +155,7 @@ function start() {
         const elements = document.querySelector('.login-footer');
 
         if (localStorage.getItem(selectedValue)) {
-          console.log('Klucz istnieje w local storage.');
+          console.log(`Klucz ${selectedValue} istnieje w local storage.`);
 
           const dataFromLocalStorage = localStorage.getItem(selectedValue);
 
