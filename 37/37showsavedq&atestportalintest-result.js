@@ -3,15 +3,15 @@ const testname = document.querySelector('.test-name').innerText;
 
 if (elements.length > 0) {
   const lastElementContent = elements[elements.length - 1].textContent.trim();
-  const yearmonthdayandtestname = `${lastElementContent} ${testname}`
+  const yyyymmddandtestname = `${lastElementContent} ${testname}`
 
-  if (localStorage.getItem(yearmonthdayandtestname)) {
-    console.log('Klucz istnieje w local storage.');
+  if (localStorage.getItem(yyyymmddandtestname)) {
+    console.log(`Klucz ${yyyymmddandtestname} istnieje w local storage.`);
 
     
     
 
-    const dataFromLocalStorage = localStorage.getItem(yearmonthdayandtestname);
+    const dataFromLocalStorage = localStorage.getItem(yyyymmddandtestname);
 
 
     if (dataFromLocalStorage) {
@@ -20,7 +20,7 @@ if (elements.length > 0) {
 
       if (Array.isArray(data)) {
         const questionsListTopBar = document.querySelector('.hidden-info');
-        questionsListTopBar.innerHTML = ''; // Wyczyść zawartość elementu
+        questionsListTopBar.innerHTML = '';
         questionsListTopBar.style.display = 'block';
         questionsListTopBar.style.fontFamily = '"Aktiv Grotesk", sans-serif';
         let numerpytania = 0
@@ -40,14 +40,14 @@ if (elements.length > 0) {
         copytoclipboard.addEventListener('click', () => {
                         const tempTextArea = document.createElement('textarea');
           //tempTextArea.value = (`{"${lastElementContent} ${testname}":${JSON.stringify(localStorage.getItem(`${lastElementContent} ${testname}`))}}`);
-          tempTextArea.value = (`{"${yearmonthdayandtestname}":${JSON.stringify(localStorage.getItem(`${yearmonthdayandtestname}`))}}`);;
+          tempTextArea.value = (`{"${yyyymmddandtestname}":${JSON.stringify(localStorage.getItem(`${yyyymmddandtestname}`))}}`);;
           document.body.appendChild(tempTextArea);
           tempTextArea.focus();
           tempTextArea.select();
           var result = document.execCommand('copy');
           document.body.removeChild(tempTextArea);
           if(result)
-          alert("Skopiowano polecenie do schowka. Pamiętaj żeby wpisać literkę j przed wklejeniem polecenia")
+          alert("Test został skopiowany do schowka.")
           else
             prompt('Nie udało się skopiować polecenia do schowka. Ręcznie skopiuj poniższe polecenie\n\n', tempTextArea.value);   
         });
