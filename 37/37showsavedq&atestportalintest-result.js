@@ -3,13 +3,15 @@ const testname = document.querySelector('.test-name').innerText;
 
 if (elements.length > 0) {
   const lastElementContent = elements[elements.length - 1].textContent.trim();
+  const yearmonthdayandtestname = `${lastElementContent} ${testname}`
 
-
-  if (localStorage.getItem(`${lastElementContent} ${testname}`)) {
+  if (localStorage.getItem(yearmonthdayandtestname)) {
     console.log('Klucz istnieje w local storage.');
 
+    
+    
 
-    const dataFromLocalStorage = localStorage.getItem(`${lastElementContent} ${testname}`);
+    const dataFromLocalStorage = localStorage.getItem(yearmonthdayandtestname);
 
 
     if (dataFromLocalStorage) {
@@ -36,18 +38,18 @@ if (elements.length > 0) {
         copytoclipboard.style.minWidth = '100%';
         questionsListTopBar.appendChild(copytoclipboard);
         copytoclipboard.addEventListener('click', () => {
-          //navigator.clipboard.writeText(`Object.entries({"${selectedValue}":${JSON.stringify(localStorage.getItem(`${selectedValue}`))}}).forEach(([k,v])=>localStorage.setItem(k,v))`);
-                        const input = document.createElement('input');
-          input.value = (`avascript:Object.entries({"${lastElementContent} ${testname}":${JSON.stringify(localStorage.getItem(`${lastElementContent} ${testname}`))}}).forEach(([k,v])=>localStorage.setItem(k,v))`);
-          document.body.appendChild(input);
-          input.focus();
-          input.select();
+                        const tempTextArea = document.createElement('textarea');
+          //tempTextArea.value = (`{"${lastElementContent} ${testname}":${JSON.stringify(localStorage.getItem(`${lastElementContent} ${testname}`))}}`);
+          tempTextArea.value = (`{"${yearmonthdayandtestname}":${JSON.stringify(localStorage.getItem(`${yearmonthdayandtestname}`))}}`);;
+          document.body.appendChild(tempTextArea);
+          tempTextArea.focus();
+          tempTextArea.select();
           var result = document.execCommand('copy');
-          document.body.removeChild(input);
+          document.body.removeChild(tempTextArea);
           if(result)
           alert("Skopiowano polecenie do schowka. Pamiętaj żeby wpisać literkę j przed wklejeniem polecenia")
           else
-            prompt('Nie udało się skopiować polecenia do schowka. Ręcznie skopiuj poniższe polecenie\n\n', input.value);   
+            prompt('Nie udało się skopiować polecenia do schowka. Ręcznie skopiuj poniższe polecenie\n\n', tempTextArea.value);   
         });
 
 
