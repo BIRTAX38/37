@@ -49,8 +49,13 @@ function arraysEqual(arr1, arr2) {
 const testNameElement = document.querySelector('.test-name');
 const testName = testNameElement ? testNameElement.textContent.trim() : null;
 
-// Sprawdzenie czy aktualny adres URL zawiera LoadTestStart.html
-if (window.location.href.includes("LoadTestStart.html") && testName) {}
+const amountOfQuestionsElement = document.querySelector('.question_header_content');
+let amountOfQuestions = amountOfQuestionsElement ? amountOfQuestionsElement.textContent.trim() : null;
+// Usunięcie tekstu "Pytanie" oraz liczby przed "/" oraz samego "/"
+amountOfQuestions = amountOfQuestions.replace(/Pytanie \d+\//, "").trim();
+console.log(`Liczba pytań: ${amountOfQuestions}`);
+
+
 
 // Sprawdzenie czy aktualny adres URL zawiera DoStartTest.html lub DoTestQuestion.html
 if ((window.location.href.includes("DoStartTest.html") || window.location.href.includes("DoTestQuestion.html") || window.location.href.includes("LoadQuestion.html") || window.location.href.includes("StartNextAttempt.html")) && testName) {
@@ -113,12 +118,12 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
                 jsonData.push(newData);
                 localStorage.setItem(`${today} ${testname}`, JSON.stringify(jsonData));
             } else {
-                localStorage.setItem(`${today} ${testname}`, JSON.stringify([{ "Nazwa testu": testName }, newData]));
+                localStorage.setItem(`${today} ${testname}`, JSON.stringify([{ "Nazwa testu": testName, "Liczba pytań": amountOfQuestions }, newData]));
             }
 
-            console.log(`Dodano pytanie i odpowiedzi do local storage dla daty ${today}`);
+            console.log(`Zapisano pytanie i odpowiedzi w (local storage) dla testu "${today} ${testname}"`);
         } else {
-            console.log(`Dla daty ${today} pytanie i odpowiedzi już istnieją w local storage`);
+            console.log(`Dla testu "${today} ${testname}" aktualne pytanie oraz odpowiedzi zostały już zapisane w (local storage)`);
         }
     }
 }
