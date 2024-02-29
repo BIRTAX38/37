@@ -59,9 +59,45 @@ if (elements.length > 0) {
 
           Object.entries(obj).forEach(([key, value]) => {
             if (key === "Nazwa testu") {
-              const h1 = document.createElement('h1');
-              h1.textContent = `${key}: ${value}`;
-              container.appendChild(h1);
+              const h2 = document.createElement('h2');
+              h2.innerHTML = `${key}: <br>${value} ${lastElementContent}`;
+              container.appendChild(h2);
+            } else if (key === "Ilość pytań w teście") {
+              const spacer = document.createElement('hr');
+              container.appendChild(spacer);
+
+              const h3amountofquestion = document.createElement('h3');
+              h3amountofquestion.textContent = `${key}: ${value}`;
+              container.appendChild(h3amountofquestion);
+
+              
+              // Odczytaj dane z lokalnego magazynu
+              var storedData = localStorage.getItem(yyyymmddandtestname);
+              var parsedData = JSON.parse(storedData);
+              var questionHTMLCount = 0;
+              parsedData.forEach(function(item) {
+                if (item.questionHTML) 
+                {
+                    questionHTMLCount++;
+                }
+            });
+            if ((questionHTMLCount < value))
+            {
+                let ilebraukjepytan = value - questionHTMLCount
+                alert(`Wszystkie pytania z testu nie zostały zapisane, brakuje ${ilebraukjepytan} pytań.\nMoże być tak dlatego że skrypt nie został włączony lub pytanie zostało pominięte przechodząc np. z 1 na 3`)
+            }
+            else
+            {
+            if ((questionHTMLCount > value))
+            {
+                alert("Pytania zostały powielone zgłoś ten błąd")
+            }
+        }
+            console.log("Liczba elementów z questionHTML w (local storage): " + questionHTMLCount);
+
+              const h3amountofsavedquestion = document.createElement('h3');
+              h3amountofsavedquestion.textContent = `Ilość zapisanych pytań: ${questionHTMLCount}`;
+              container.appendChild(h3amountofsavedquestion);
             } else if (key === "questionHTML") {
               numerpytania = numerpytania + 1;
               const p = document.createElement('p');
