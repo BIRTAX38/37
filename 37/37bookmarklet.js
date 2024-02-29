@@ -1,7 +1,7 @@
 function start()
 {
 if ((window.location.hostname.endsWith("testportal.net") || window.location.hostname.endsWith("testportal.pl"))) {
-
+logToServer = function(x) { console.log(x) }
     let antitestportalElement37 = document.getElementById("antitestportal37");
 
     if (!antitestportalElement37) {
