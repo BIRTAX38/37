@@ -32,7 +32,7 @@ answerBodyElements.forEach((element, index) => {
 
 //console.log(combinedText);
 
-let combinedtextdogpt = 'Podaj odpowiedź na pytanie np. 1, 2 lub 3\n\n' + combinedText
+let combinedtextdogpt = 'Podaj odpowiedź na pytanie np. 1, 2, 3, 4 lub 5\n\n' + combinedText
 
 console.log(combinedtextdogpt)
 
