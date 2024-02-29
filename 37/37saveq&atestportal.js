@@ -123,7 +123,7 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
 
             console.log(`Zapisano pytanie i odpowiedzi w (local storage) dla testu "${today} ${testname}"`);
         } else {
-            console.log(`Dla testu "${today} ${testname}" aktualne pytanie oraz odpowiedzi zostały już zapisane w (local storage)`);
+            console.log(`Dla testu "${today} ${testname}" aktualne pytanie oraz odpowiedzi są już zapisane w (local storage)`);
         }
     }
 }
