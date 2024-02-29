@@ -50,32 +50,7 @@ const testNameElement = document.querySelector('.test-name');
 const testName = testNameElement ? testNameElement.textContent.trim() : null;
 
 // Sprawdzenie czy aktualny adres URL zawiera LoadTestStart.html
-if (window.location.href.includes("LoadTestStart.html") && testName) {
-    const today = new Date().toLocaleDateString('en-CA', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit'
-    }).replace(/\//g, '-');
-
-
-    // Sprawdzenie czy dana data jest już w local storage
-    const existingDataandTestname = localStorage.getItem(`${today} ${testname}`);
-    if (!existingDataandTestname) {
-        localStorage.setItem(`${today} ${testname}`, JSON.stringify([{ "Nazwa testu": testName }]));
-        console.log(`Dodano do local storage: ${today} - ${testName}`);
-    } else {
-        const jsonData = JSON.parse(existingDataandTestname);
-        const existingTestNameData = jsonData.find(data => data["Nazwa testu"] === testName);
-
-        if (!existingTestNameData) {
-            jsonData.unshift({ "Nazwa testu": testName });
-            localStorage.setItem(`${today} ${testname}`, JSON.stringify(jsonData));
-            console.log(`Dodano do local storage: ${today} - ${testName}`);
-        } else {
-            console.log(`Dla daty ${today} dane już istnieją w local storage`);
-        }
-    }
-}
+if (window.location.href.includes("LoadTestStart.html") && testName) {}
 
 // Sprawdzenie czy aktualny adres URL zawiera DoStartTest.html lub DoTestQuestion.html
 if ((window.location.href.includes("DoStartTest.html") || window.location.href.includes("DoTestQuestion.html") || window.location.href.includes("LoadQuestion.html") || window.location.href.includes("StartNextAttempt.html")) && testName) {
