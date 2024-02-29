@@ -53,7 +53,7 @@ const amountOfQuestionsElement = document.querySelector('.question_header_conten
 let amountOfQuestions = amountOfQuestionsElement ? amountOfQuestionsElement.textContent.trim() : null;
 // Usunięcie tekstu "Pytanie" oraz liczby przed "/" oraz samego "/"
 amountOfQuestions = amountOfQuestions.replace(/Pytanie \d+\//, "").trim();
-console.log(`Liczba pytań: ${amountOfQuestions}`);
+console.log(`Ilość pytań w teście: ${amountOfQuestions}`);
 
 
 
@@ -118,7 +118,7 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
                 jsonData.push(newData);
                 localStorage.setItem(`${today} ${testname}`, JSON.stringify(jsonData));
             } else {
-                localStorage.setItem(`${today} ${testname}`, JSON.stringify([{ "Nazwa testu": testName, "Liczba pytań": amountOfQuestions }, newData]));
+                localStorage.setItem(`${today} ${testname}`, JSON.stringify([{ "Nazwa testu": testName, "Ilość pytań w teście": amountOfQuestions }, newData]));
             }
 
             console.log(`Zapisano pytanie i odpowiedzi w (local storage) dla testu "${today} ${testname}"`);
