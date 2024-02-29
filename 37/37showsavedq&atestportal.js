@@ -225,7 +225,7 @@ function start() {
                     if ((questionHTMLCount < value))
                     {
                         let ilebraukjepytan = value - questionHTMLCount
-                        alert(`Wszystkie pytania z testu nie zostały zapisane, brakuje ${ilebraukjepytan} pytań.\nMoże być tak dlatego że jakieś zostało pominięte np. lub skrypt nie zosatał włączony`)
+                        alert(`Wszystkie pytania z testu nie zostały zapisane, brakuje ${ilebraukjepytan} pytań.\nMoże być tak dlatego że skrypt nie został włączony lub pytanie zostało pominięte przechodząc np. z 1 na 3`)
                     }
                     else
                     {
