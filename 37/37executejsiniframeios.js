@@ -73,6 +73,16 @@ window.addEventListener('popstate', function () {
                 alert(e);
             }`;
             iframeDocument.body.appendChild(script);
+
+            const scripttocheckstatus = iframeDocument.createElement('script');
+            scripttocheckstatus.textContent = `
+            if (window.location.hostname.endsWith("testportal.net") || window.location.hostname.endsWith("testportal.pl") & window.location.href.includes("LoadTestStart.html"))
+            {
+            fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/addonsto37executejsiniframeios/37executejsiniframestatus.js').then(function(response){response.text().then(function(text){eval(text);});});
+            }`;
+            iframeDocument.body.appendChild(scripttocheckstatus);
+
+
             let iframedofix = document.querySelector('iframe[id="37iframetestportal"]');
             setInterval(() => {
                 autofixwhiframe(iframedofix)
