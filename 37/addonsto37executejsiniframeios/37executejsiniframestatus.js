@@ -5,7 +5,7 @@ function fetchData() {
         return response.json();
       })
       .then(function(json) {
-        const textfromjson = `<hr> <b>Status: ${json.status}</b> <br /> Changelog: ${json.changelog} <br /> <br /> ${json.text} <br /> <br /> <b>By: ${json.creator}</b>`;
+        const textfromjson = `<hr> <b>Status: ${json.status}</b> <br /> <br /> Changelog: ${json.changelog} <br /> <br /> ${json.text} <br /> <br /> <b>By: ${json.creator}</b>`;
         document.getElementsByClassName('test-card-body')[0].innerHTML += textfromjson;
       })
       .catch(function(error) {
