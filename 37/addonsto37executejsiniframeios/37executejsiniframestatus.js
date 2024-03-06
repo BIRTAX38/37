@@ -1,12 +1,16 @@
+function fetchData() {
+    let statusandchangelogurl = `https://raw.githubusercontent.com/BIRTAX38/37/main/37/addonsto37executejsiniframeios/37statusandchangelog.json`;
+    fetch(statusandchangelogurl)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(json) {
+        const textfromjson = `<hr> <b>Status: ${json.status}</b> <br /> Changelog: ${json.changelog} <br /> <br /> ${json.text} <br /> <br /> <b>By: ${json.creator}</b>`;
+        document.getElementsByClassName('test-card-body')[0].innerHTML += textfromjson;
+      })
+      .catch(function(error) {
+        console.log('Fetch Error:', error);
+      });
+}
 
-  let statusandchangelogurl = `https://raw.githubusercontent.com/BIRTAX38/37/main/37/addonsto37executejsiniframeios/37statusandchangelog.json`;
-  var myDate = new Date();
-  const godzinadopopup = myDate.toLocaleTimeString();
-  await fetch(statusandchangelogurl).then((response) =>
-                        response.json().then((json) => {
-
-const textfromjson = `<hr> <b>Status: ${json.status}</b> <br /> Changelog: ${json.changelog} <br /> <br /> <b>${json.text}</b> <br /> <br /> <b>By: ${json.creator}</b>
-`;
-document.getElementsByClassName('test-card-body')[0].innerHTML += textfromjson
-  })
-                      );
+fetchData();
