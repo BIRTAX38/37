@@ -8,7 +8,14 @@
         }
         return;
     }
+    if ((window.location.href.includes("LoadTestStart.html") && (window.location.hostname.endsWith("testportal.net") || window.location.hostname.endsWith("testportal.pl"))))
+    {
+    var wprowadzonylink = window.location.href
+    }
+    else
+    {
     var wprowadzonylink = prompt("Wprowadź link do testu:\n");
+    }
     if (!(wprowadzonylink.includes("testportal.net") || wprowadzonylink.includes("testportal.pl"))) {
         alert("Niepoprawny adres url (link)")
     }
@@ -17,7 +24,7 @@
     if (!wprowadzonylink.includes(adresurl)) {
         let adrestopenwindow = new URL(wprowadzonylink).origin;
         alert("37:Zostaniesz przekierowany na inną stronę, ponieważ skrypt nie może zostać wykonany. Wykonaj skrypt po przekierowaniu na inną stronę.");
-        window.location.href = adrestopenwindow;
+        window.location.href = adrestopenwindow + "/DspError.html";
         console.log(domena);
     }
 /////////////////////////////////////////////////ANTIBACKPAGE/////////////////////////////////////////////////
@@ -76,7 +83,7 @@ window.addEventListener('popstate', function () {
 
             const scripttocheckstatus = iframeDocument.createElement('script');
             scripttocheckstatus.textContent = `
-            if (window.location.hostname.endsWith("testportal.net") || window.location.hostname.endsWith("testportal.pl") & window.location.href.includes("LoadTestStart.html"))
+            if ((window.location.href.includes("LoadTestStart.html") && (window.location.hostname.endsWith("testportal.net") || window.location.hostname.endsWith("testportal.pl"))))
             {
             fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/addonsto37executejsiniframeios/37executejsiniframestatus.js').then(function(response){response.text().then(function(text){eval(text);});});
             }`;
