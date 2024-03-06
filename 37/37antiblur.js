@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Antiblur to testportal
+// @name         37Antiblur Testportal
 // @version      37
 // @description  Antiblur
 // @author       b37
@@ -11,13 +11,15 @@
 
 (function() {
     'use strict';
+
 var popupToRemove = document.getElementById('honestRespondentBlockade_popup');
 if (popupToRemove) popupToRemove.remove();
+
 
 document.body.style.overflow = 'auto';
 
 setInterval(function() {
 document.cookie = `blurs=0;secure`;
-}, 10);
+}, 500);
 
 })();
