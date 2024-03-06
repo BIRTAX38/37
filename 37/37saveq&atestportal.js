@@ -1,3 +1,4 @@
+function startsaveqandatestportal() {
 
 // Funkcja do formatowania odpowiedzi w żądany sposób
 var testname = document.querySelector('.test-name').innerText;
@@ -127,3 +128,7 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
         }
     }
 }
+
+}
+
+setTimeout(startsaveqandatestportal, 200)
