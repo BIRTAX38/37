@@ -33,6 +33,12 @@ window.addEventListener('popstate', function () {
     history.pushState(null, null, document.URL);
 });
 /////////////////////////////////////////////////ANTIBACKPAGE/////////////////////////////////////////////////
+//////////////////////////////
+setInterval(function() {
+document.cookie = `blurs=0;secure`;
+}, 500);
+//////////////////////////////
+
     document.getElementsByTagName("html")[0].innerHTML = "";
     document.body.style.backgroundColor = "white";
     function openIframeWithInjectedCode() {
