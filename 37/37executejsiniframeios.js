@@ -79,6 +79,8 @@ window.addEventListener('popstate', function () {
             } catch (e) {    
                 alert(e);
             }
+
+
 document.cookie = 'blurs=0;secure';
 `;
             iframeDocument.body.appendChild(script);
