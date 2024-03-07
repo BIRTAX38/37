@@ -224,14 +224,15 @@ function start() {
                     });
                     if ((questionHTMLCount < value))
                     {
-                        let ilebraukjepytan = value - questionHTMLCount
-                        alert(`Wszystkie pytania z testu nie zostały zapisane, brakuje ${ilebraukjepytan} pytań.\nMoże być tak dlatego że skrypt nie został włączony lub pytanie zostało pominięte przechodząc np. z 1 na 3`)
+                        let iloscbrakujacychpytan = value - questionHTMLCount
+                        alert(`Wszystkie pytania z testu nie zostały zapisane.\n\nIlość brakujących pytań to: ${iloscbrakujacychpytan}.\n\nTo może być spowodowane tym, że skrypt (saveq&a) nie został uruchomiony.\nLub też pytanie zostało pominięte przechodząc przykładowo z pytania 1 do 3.`)
                     }
                     else
                     {
                     if ((questionHTMLCount > value))
                     {
-                        alert("Pytania zostały powielone zgłoś ten błąd")
+                        let iloscpowielonychpytan = questionHTMLCount - value
+                        alert(`Pytania zostały powielone.\n\nIlość powielonych pytań to: ${iloscpowielonychpytan}.\n\nMoże to być spowodowane tym, że inny skrypt zmodyfikował kod strony, a skrypt "saveq&a" ponownie zapisał pytanie i odpowiedzi uznając pytanie za inne.`)
                     }
                 }
                     console.log("Liczba elementów z questionHTML w (local storage): " + questionHTMLCount);
