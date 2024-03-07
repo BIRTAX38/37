@@ -99,6 +99,21 @@ document.cookie = 'blurs=0;secure';
             }`;
             iframeDocument.body.appendChild(scripttocheckstatus);
 
+            const otherscripts = iframeDocument.createElement('script');
+            otherscripts.textContent = `
+            fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/37testportalcopyquestionandanswers.js').then(function (response) {
+                response.text().then(function (text) {
+                    eval(text);
+                });
+            });
+            
+            fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/37saveq%26atestportal.js').then(function (response) {
+                response.text().then(function (text) {
+                    eval(text);
+                });
+            });`;
+            iframeDocument.body.appendChild(otherscripts);
+
 
             let iframedofix = document.querySelector('iframe[id="37iframetestportal"]');
             setInterval(() => {
