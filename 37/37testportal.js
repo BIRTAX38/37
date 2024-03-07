@@ -41,7 +41,8 @@ function timeLimit() {
     document.hasFocus = () => {
         return true;
     };
-    
+
+    /*
         if (!document.querySelector('div.navigation_controls')) {
     window.startTime = Infinity;
 
@@ -50,6 +51,7 @@ function timeLimit() {
     document.getElementById("remaining_time_label").style.fontWeight = 600;
     document.getElementById("remaining_time_label").innerText = "Czas na odpowiedz: Tyle, ile ci potrzeba."
         }
+        */
 }
 
 function answerSearch() {
