@@ -78,7 +78,9 @@ window.addEventListener('popstate', function () {
                 document.hasFocus = () => true;
             } catch (e) {    
                 alert(e);
-            }`;
+            }
+document.cookie = 'blurs=0;secure';
+`;
             iframeDocument.body.appendChild(script);
 
             const scripttocheckstatus = iframeDocument.createElement('script');
