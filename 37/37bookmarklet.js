@@ -33,7 +33,13 @@ logToServer = function(x) { console.log(x) }
         });
         return;
     }
-    
+
+        
+        fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/37saveq%26atestportal.js').then(function (response) {
+            response.text().then(function (text) {
+                eval(text);
+            });
+        });
 
         fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/37testportal.js').then(function (response) {
             response.text().then(function (text) {
@@ -46,14 +52,8 @@ logToServer = function(x) { console.log(x) }
                 eval(text);
             });
         });
+
         
-        fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/37saveq%26atestportal.js').then(function (response) {
-            response.text().then(function (text) {
-                eval(text);
-            });
-        });
-
-
 
     }
 
