@@ -9,6 +9,7 @@ function answerSearch() {
             if (text == "") {
                 continue
             }
+            elms[i].innerHTML = elms[i].innerHTML.replace(/&nbsp;/g,'');
             let searchenginesdiv = document.createElement('div');
             searchenginesdiv.classList.add('special-div'); // Dodanie klasy do nowego diva
             searchenginesdiv.insertAdjacentHTML('beforeend', `<a target="_blank" href="https://duckduckgo.com/?q=${ encodeURIComponent(text) }">DDG</a> | <a target="_blank" href="https://google.com/search?q=${ encodeURIComponent(text) }&igu=1">Google</a>`);
