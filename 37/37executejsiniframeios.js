@@ -1,32 +1,9 @@
 (function() {
-    if (!(window.location.href.includes("testportal.net") || window.location.href.includes("testportal.pl"))) {
-        alert("Domain is invalid script cannot be executed")
-        redirecttotestportal = confirm("Czy chcesz zostać przeniesiony do strony testportal?\nPamiętaj musisz ponownie uruchomić skrypt po przeniesieniu.")
-        if (redirecttotestportal) 
-        {
-            window.location.href = "https://testportal.pl"
-        }
-        return;
+    if (!((window.location.href.includes("testportal.net") || window.location.href.includes("testportal.pl")) && (window.location.href.includes("LoadTestStart.html") || window.location.href.includes("DoStartTest.html") || window.location.href.includes("DoTestQuestion.html") || window.location.href.includes("LoadQuestion.html") || window.location.href.includes("StartNextAttempt.html")))) {
+        alert("Aktualnie jest nowy sposób używania 7357P0R74L execute js in iframe.\nAby go użyć należy:\n\n===================\nWejść na test używając linku i uruchomić 7357P0R74L execute js in iframe przed rozpoczęciem testu.\n(W trakcie też można ale nie jest to zalecane ponieważ mogą wystąpić pewne komplikacje)\n===================\n\nLink do testu powinien wyglądać następująco:\nhttps://www.testportal.net/exam/LoadTestStart.html?t= i jakieś losowe znaki\nlub\nttps://www.testportal.net/test.html?t= i jakieś losowe znaki\nPo uruchomieniu zobaczysz dodatkowe informacje np. czy skrypt jest aktywny itp.\n")
+        return
     }
-    if ((window.location.href.includes("LoadTestStart.html") && (window.location.hostname.endsWith("testportal.net") || window.location.hostname.endsWith("testportal.pl"))))
-    {
-    var wprowadzonylink = window.location.href
-    }
-    else
-    {
-    var wprowadzonylink = prompt("Wprowadź link do testu:\n");
-    }
-    if (!(wprowadzonylink.includes("testportal.net") || wprowadzonylink.includes("testportal.pl"))) {
-        alert("Niepoprawny adres url (link)")
-    }
-    var adresurl = new URL(window.location.href).hostname.replace(/^www\./, '');
-    console.log(adresurl);
-    if (!wprowadzonylink.includes(adresurl)) {
-        let adrestopenwindow = new URL(wprowadzonylink).origin;
-        alert("37:Zostaniesz przekierowany na inną stronę, ponieważ skrypt nie może zostać wykonany. Wykonaj skrypt po przekierowaniu na inną stronę.");
-        window.location.href = adrestopenwindow + "/DspError.html";
-        console.log(domena);
-    }
+    var linkdotestu = window.location.href
 /////////////////////////////////////////////////ANTIBACKPAGE/////////////////////////////////////////////////
 history.pushState(null, null, document.URL);
 window.addEventListener('popstate', function () {
@@ -43,7 +20,7 @@ document.cookie = `blurs=0;secure`;
     document.body.style.backgroundColor = "white";
     function openIframeWithInjectedCode() {
         const iframe = document.createElement('iframe');
-        iframe.src = wprowadzonylink;
+        iframe.src = linkdotestu;
         iframe.width = window.innerWidth;
         iframe.height = window.innerHeight;
         iframe.id = "37iframetestportal"
