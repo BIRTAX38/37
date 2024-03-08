@@ -9,36 +9,30 @@ function answerSearch() {
             if (text == "") {
                 continue
             }
-            elms[i].innerHTML += `<a target="_blank" href="https://duckduckgo.com/?q=${ encodeURIComponent(text) }">DDG</a> | <a target="_blank" href="https://google.com/search?q=${ encodeURIComponent(text) }&igu=1">Google</a>`
-            
-            // Dodawanie specjalnego div dla elementów z klasą searchenginesdiv
-            if (elms[i].classList.contains('searchenginesdiv')) {
-                const specialDiv = document.createElement('div');
-                specialDiv.innerHTML = `<a target="_blank" href="https://duckduckgo.com/?q=${ encodeURIComponent(text) }">DDG</a> | <a target="_blank" href="https://google.com/search?q=${ encodeURIComponent(text) }&igu=1">Google</a>`;
-                elms[i].appendChild(specialDiv);
-            }
+            let searchenginesdiv = document.createElement('div');
+            searchenginesdiv.classList.add('special-div'); // Dodanie klasy do nowego diva
+            searchenginesdiv.insertAdjacentHTML('beforeend', `<a target="_blank" href="https://duckduckgo.com/?q=${ encodeURIComponent(text) }">DDG</a> | <a target="_blank" href="https://google.com/search?q=${ encodeURIComponent(text) }&igu=1">Google</a>`);
+            elms[i].appendChild(searchenginesdiv); // Dodanie nowego diva wokół elementu
         }
     })
-  }
-  
-  function imageSearch() {
-      const images = document.querySelectorAll('img');
-  
-      images.forEach((image) => {
-        if (
-          !image.classList.contains('logo_wide') &&
-          !image.classList.contains('logo_default')
-        ) {
-          image.addEventListener('click', () => {
-            const imageUrl = image.getAttribute('src');
-            const googleSearchUrl =
-              'https://lens.google.com/uploadbyurl?url=' + encodeURIComponent(imageUrl);
-            window.open(googleSearchUrl);
-          });
-        }
-      });
-    }
-  
-      setTimeout(answerSearch, 100)
-      setTimeout(imageSearch, 200)
-  
+}
+function imageSearch() {
+    const images = document.querySelectorAll('img');
+
+    images.forEach((image) => {
+      if (
+        !image.classList.contains('logo_wide') &&
+        !image.classList.contains('logo_default')
+      ) {
+        image.addEventListener('click', () => {
+          const imageUrl = image.getAttribute('src');
+          const googleSearchUrl =
+            'https://lens.google.com/uploadbyurl?url=' + encodeURIComponent(imageUrl);
+          window.open(googleSearchUrl);
+        });
+      }
+    });
+}
+
+setTimeout(answerSearch, 100)
+setTimeout(imageSearch, 200)
