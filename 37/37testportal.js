@@ -55,8 +55,8 @@ function timeLimit() {
 }
 
 function answerSearch() {
-    let hackClass = ["answer_body", "question_essence"]
-    hackClass.forEach(c => {
+    let classqanda = ["answer_body", "question_essence"]
+    classqanda.forEach(c => {
         let elms = document.getElementsByClassName(c)
         for (let i = 0; i < elms.length; i++) {
             console.log(elms[i])
@@ -64,8 +64,15 @@ function answerSearch() {
             if (text == "") {
                 continue
             }
-            elms[i].innerHTML += `<a target="_blank" href="https://duckduckgo.com/?q=${ encodeURIComponent(text) }">DDG</a> | <a target="_blank" href="https://google.com/search?q=${ encodeURIComponent(text) }&igu=1">Google</a>`
-            //https://www.google.com/searchbyimage?igu=1&image_url='+encodeURI(a.src)+'
+            elms[i].innerHTML = elms[i].innerHTML.replace(/&nbsp;/g,'');
+            let searchenginesdiv = document.createElement('div');
+            searchenginesdiv.classList.add('special-div'); // Dodanie klasy do nowego diva
+            searchenginesdiv.insertAdjacentHTML('beforeend', `<a target="_blank" href="https://duckduckgo.com/?q=${ encodeURIComponent(text) }">DDG</a> | <a target="_blank" href="https://google.com/search?q=${ encodeURIComponent(text) }&igu=1">Google</a>`);
+            elms[i].appendChild(searchenginesdiv); // Dodanie nowego diva wokół elementu
+            if (c === 'question_essence') { // Dodanie warunku, aby &nbsp; dodawane było tylko dla question_essence
+                continue;
+            }
+            elms[i].insertAdjacentHTML('beforeend', '&nbsp;');
         }
     })
 }
@@ -85,7 +92,7 @@ function imageSearch() {
         });
       }
     });
-  }
+}
 
 
 //setTimeout(initPage, 100)
