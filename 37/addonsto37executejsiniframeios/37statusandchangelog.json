@@ -1,6 +1,9 @@
 {
-    "status": "Online",
-    "changelog": "Added:<br> bypass to: Honest Respondent Technology<br>Added anti reload page",
-    "text": "Remember, don't get caught",
-    "author": "b39"
+  "status": "Online",
+  "changelog": [
+    "Dodano obejście do: Technologii Uczciwego Rozwiązującego",
+    "Dodano anty-odświeżanie strony"
+  ],
+  "text": "Remember, don't get caught",
+  "author": "b39"
 }
