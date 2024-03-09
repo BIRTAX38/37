@@ -1,6 +1,6 @@
 (function() {
     if (!((window.location.href.includes("testportal.net") || window.location.href.includes("testportal.pl")) && (window.location.href.includes("LoadTestStart.html") || window.location.href.includes("DoStartTest.html") || window.location.href.includes("DoTestQuestion.html") || window.location.href.includes("LoadQuestion.html") || window.location.href.includes("StartNextAttempt.html")))) {
-        alert("Aktualnie jest nowy sposób używania 7357P0R74L execute js in iframe.\nAby go użyć należy:\n\n===================\nWejść na test używając linku i uruchomić 7357P0R74L execute js in iframe przed rozpoczęciem testu.\n(W trakcie też można ale nie jest to zalecane ponieważ mogą wystąpić pewne komplikacje)\n===================\n\nLink do testu powinien wyglądać następująco:\nhttps://www.testportal.net/exam/LoadTestStart.html?t= i jakieś losowe znaki\nlub\nttps://www.testportal.net/test.html?t= i jakieś losowe znaki\nPo uruchomieniu zobaczysz dodatkowe informacje np. czy skrypt jest aktywny itp.\n")
+        alert("Aktualnie jest nowy sposób używania 7357P0R74L-bookmark.\nAby go użyć należy:\n\n===================\nWejdź na test używając linku i uruchom 7357P0R74L-bookmark przed rozpoczęciem testu.\n(W trakcie też można ale nie jest to zalecane ponieważ mogą wystąpić pewne komplikacje)\n===================\n\nLink do testu powinien wyglądać następująco:\nhttps://www.testportal.net/exam/LoadTestStart.html?t= i jakieś losowe znaki\nlub\nttps://www.testportal.net/test.html?t= i jakieś losowe znaki\nPo uruchomieniu zobaczysz dodatkowe informacje np. czy skrypt jest aktywny itp.\n")
         return
     }
     var linkdotestu = window.location.href
@@ -65,6 +65,9 @@ window.addEventListener('popstate', function () {
 
 
 document.cookie = 'blurs=0;secure';
+window.addEventListener("beforeunload", function() {
+    document.cookie = 'blurs=0;secure';
+  });
 `;
             iframeDocument.body.appendChild(script);
 
