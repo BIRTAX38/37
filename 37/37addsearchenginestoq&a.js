@@ -11,7 +11,7 @@ function answerSearch() {
             }
             elms[i].innerHTML = elms[i].innerHTML.replace(/&nbsp;/g,'');
             let searchenginesdiv = document.createElement('div');
-            searchenginesdiv.classList.add('special-div'); // Dodanie klasy do nowego diva
+            searchenginesdiv.classList.add('searchengines')
             searchenginesdiv.insertAdjacentHTML('beforeend', `<a target="_blank" href="https://duckduckgo.com/?q=${ encodeURIComponent(text) }">DDG</a> | <a target="_blank" href="https://google.com/search?q=${ encodeURIComponent(text) }&igu=1">Google</a>`);
             elms[i].appendChild(searchenginesdiv); // Dodanie nowego diva wokół elementu
             if (c === 'question_essence') { // Dodanie warunku, aby &nbsp; dodawane było tylko dla question_essence
