@@ -61,10 +61,14 @@ console.log(`Ilość pytań w teście: ${amountOfQuestions}`);
 // Sprawdzenie czy aktualny adres URL zawiera DoStartTest.html lub DoTestQuestion.html
 if ((window.location.href.includes("DoStartTest.html") || window.location.href.includes("DoTestQuestion.html") || window.location.href.includes("LoadQuestion.html") || window.location.href.includes("StartNextAttempt.html")) && testName) {
     const questionEssenceElement = document.querySelector('.question_essence');
+    const questionHTMLwithsearchengines = questionEssenceElement.outerHTML;
+    const questionHTMLwithoutsearchengines = questionHTMLwithsearchengines.replace(/<div class="searchengines">.*?<\/div>/, '');
+    const questionHTML = questionHTMLwithoutsearchengines
+    //console.log(questionHTML);
     const questionAnswers = document.querySelector('.question_answers');
 
-    if (questionEssenceElement && questionAnswers) {
-        const questionHTML = questionEssenceElement.outerHTML; // Kopiowanie całego elementu HTML
+    if (questionHTML && questionAnswers) {
+        
         const answerContainers = questionAnswers.querySelectorAll('.answer_container');
         const answersArray = [];
         let answerType = "";
@@ -131,4 +135,4 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
 
 }
 
-setTimeout(startsaveqandatestportal, 200)
+setTimeout(startsaveqandatestportal, 500)
