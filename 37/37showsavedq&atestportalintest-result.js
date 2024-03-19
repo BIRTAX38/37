@@ -117,7 +117,7 @@ if (elements.length > 0) {
                   const ul = document.createElement('ul');
                   value.forEach(answer => {
                       const li = document.createElement('li');
-                      li.textContent = answer;
+                      li.innerHTML = answer;
                       ul.appendChild(li);
                   });
                   p.appendChild(ul);
