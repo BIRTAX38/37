@@ -201,7 +201,12 @@ function start() {
                   Object.entries(obj).forEach(([key, value]) => {
                     if (key === "Nazwa testu") {
                       const h2 = document.createElement('h2');
-                      h2.innerHTML = `${key}: <br>${value} ${datatestu}`;
+
+                      const [rok, miesiac, dzien] = datatestu.split('-');
+                      const dataSkonwertowana = `${dzien}-${miesiac}-${rok}`;
+                      console.log(dataSkonwertowana);
+
+                      h2.innerHTML = `${key}: <br>${value} <br>Data zapisania testu: <br>${dataSkonwertowana}`;
                       container.appendChild(h2);
                     } else if (key === "Ilość pytań w teście") {
                       const spacer = document.createElement('hr');
@@ -258,7 +263,7 @@ function start() {
                           const ul = document.createElement('ul');
                           value.forEach(answer => {
                               const li = document.createElement('li');
-                              li.textContent = answer;
+                              li.innerHTML = answer;
                               ul.appendChild(li);
                           });
                           p.appendChild(ul);
