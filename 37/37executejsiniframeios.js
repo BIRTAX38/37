@@ -75,6 +75,13 @@ window.addEventListener("beforeunload", function() {
             scripttocheckstatus.textContent = `
             if ((window.location.href.includes("LoadTestStart.html") && (window.location.hostname.endsWith("testportal.net") || window.location.hostname.endsWith("testportal.pl"))))
             {
+                
+                fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/addonsto37executejsiniframeios/automaticbugreportbeyondiframe.js').then(function (response) {
+                    response.text().then(function (text) {
+                        eval(text);
+                    });
+                });
+
             fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/addonsto37executejsiniframeios/37executejsiniframestatus.js').then(function(response){response.text().then(function(text){eval(text);});});
             }`;
             iframeDocument.body.appendChild(scripttocheckstatus);
@@ -93,7 +100,7 @@ window.addEventListener("beforeunload", function() {
                 });
             });
             
-            fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/addonsto37executejsiniframeios/automaticbugreportbeyondiframe.js').then(function (response) {
+            fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/addonsto37executejsiniframeios/automaticbugreportiniframe.js').then(function (response) {
                 response.text().then(function (text) {
                     eval(text);
                 });
@@ -138,10 +145,6 @@ function autofixwhiframe(iframe)
         event.returnValue = "Wait";
       });
       
-      fetch('https://raw.githubusercontent.com/BIRTAX38/37/main/37/addonsto37executejsiniframeios/automaticbugreportbeyondiframe.js').then(function (response) {
-        response.text().then(function (text) {
-            eval(text);
-        });
-    });
+
 
 })();
