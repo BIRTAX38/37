@@ -74,7 +74,7 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
                 const answerHTML = answerHTMLwithsearchenginesetc.replace(/<div class="searchengines">.*?<\/div>/, '')
                 .replace(/<div class="zoom-button-wrapper">.*?<\/div>/, '')
                 .replace(/<div class="zoom-out-button-wrapper">.*?<\/div>/, '')
-                .replace(/\n\n&nbsp;/g, '');
+                .replace(/&nbsp;/g, '');
                     answersArray.push(answerHTML);
                 
             }
