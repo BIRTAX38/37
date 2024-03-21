@@ -56,7 +56,9 @@ console.log(`Ilość pytań w teście: ${amountOfQuestions}`);
 if ((window.location.href.includes("DoStartTest.html") || window.location.href.includes("DoTestQuestion.html") || window.location.href.includes("LoadQuestion.html") || window.location.href.includes("StartNextAttempt.html")) && testName) {
     const questionEssenceElement = document.querySelector('.question_essence');
     const questionHTMLwithsearchengines = questionEssenceElement.outerHTML;
-    const questionHTMLwithoutsearchengines = questionHTMLwithsearchengines.replace(/<div class="searchengines">.*?<\/div>/, '');
+    const questionHTMLwithoutsearchengines = questionHTMLwithsearchengines.replace(/<div class="searchengines">.*?<\/div>/, '')
+    .replace(/<div class="zoom-button-wrapper">.*?<\/div>/, '')
+    .replace(/<div class="zoom-out-button-wrapper">.*?<\/div>/, '');
     const questionHTML = questionHTMLwithoutsearchengines
     //console.log(questionHTML);
     const questionAnswers = document.querySelector('.question_answers');
