@@ -3,12 +3,6 @@ function startsaveqandatestportal() {
 // Funkcja do formatowania odpowiedzi w żądany sposób
 var testname = document.querySelector('.test-name').innerText;
 
-
-// Funkcja do formatowania odpowiedzi w żądany sposób
-function formatAnswers(answersArray) {
-    return `["Odpowiedzi: ${answersArray.join(', ')}"]`;
-}
-
 // Funkcja sprawdzająca, czy pytanie i odpowiedzi już istnieją w local storage
 function checkIfDataExists(questionHTML, answersArray) {
     const today = new Date().toLocaleDateString('en-CA', {
@@ -76,10 +70,13 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
         answerContainers.forEach((answerContainer) => {
             const answerBody = answerContainer.querySelector('.answer_body');
             if (answerBody) {
-                const answerText = answerBody.querySelector('p').textContent.trim();
-                if (!answerText.includes('DDG | Google')) {
-                    answersArray.push(answerText);
-                }
+                const answerHTMLwithsearchenginesetc = answerBody.innerHTML.trim();
+                const answerHTML = answerHTMLwithsearchenginesetc.replace(/<div class="searchengines">.*?<\/div>/, '')
+                .replace(/<div class="zoom-button-wrapper">.*?<\/div>/, '')
+                .replace(/<div class="zoom-out-button-wrapper">.*?<\/div>/, '')
+                .replace(/\n\n&nbsp;/g, '');
+                    answersArray.push(answerHTML);
+                
             }
         });
 
@@ -114,7 +111,6 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
 
         // Sprawdzenie czy pytanie i odpowiedzi już istnieją w local storage
         if (!checkIfDataExists(questionHTML, answersArray)) {
-            const formattedAnswers = formatAnswers(answersArray);
             const newData = { questionHTML: questionHTML, answerType: answerType, answers: answersArray };
 
             const existingDataandTestname = localStorage.getItem(`${today} ${testname}`);
