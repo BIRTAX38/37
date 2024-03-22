@@ -1,5 +1,6 @@
 function startsaveqandatestportal() {
 
+    /*
     if (!startsaveqandatestportalElement37) {
     let startsaveqandatestportalElement37 = document.createElement("div");
     startsaveqandatestportalElement37.id = "startsaveqanda37";
@@ -12,6 +13,27 @@ function startsaveqandatestportal() {
         console.log("Unikam ponownego uruchomienia skryptu w celu uniknięcia dodatkowych błędów");
         return
     }
+    */
+
+    
+var elementonlywithNumberandamountofQuestion = document.querySelector('.question_header_content').innerHTML;
+var spaceIndex = elementonlywithNumberandamountofQuestion.indexOf(' ');
+if (spaceIndex !== -1) {
+    var NumberandamountofQuestion = elementonlywithNumberandamountofQuestion.substring(spaceIndex + 1);
+    var slashIndex = NumberandamountofQuestion.indexOf('/');
+    if (slashIndex !== -1) {
+    var questionNumber = NumberandamountofQuestion.substring(0, slashIndex).trim(); 
+    var amountOfQuestions = NumberandamountofQuestion.substring(slashIndex + 1).trim(); 
+    console.log("Numer pytania: " + questionNumber);
+    console.log("Liczba pytań: " + amountOfQuestions);
+    } else {
+    console.log("Brak slasha w tekście po spacji.");
+    }
+} else {
+    console.log("Brak spacji w tekście.");
+}
+    
+
 
 // Funkcja do formatowania odpowiedzi w żądany sposób
 var testname = document.querySelector('.test-name').innerText;
@@ -57,12 +79,6 @@ function arraysEqual(arr1, arr2) {
 const testNameElement = document.querySelector('.test-name');
 const testName = testNameElement ? testNameElement.textContent.trim() : null;
 
-const amountOfQuestionsElement = document.querySelector('.question_header_content');
-let amountOfQuestions = amountOfQuestionsElement ? amountOfQuestionsElement.textContent.trim() : null;
-// Usunięcie tekstu "Pytanie" oraz liczby przed "/" oraz samego "/"
-amountOfQuestions = amountOfQuestions.replace(/Pytanie \d+\//, "").trim();
-console.log(`Ilość pytań w teście: ${amountOfQuestions}`);
-
 
 
 // Sprawdzenie czy aktualny adres URL zawiera DoStartTest.html lub DoTestQuestion.html
@@ -101,9 +117,8 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
             }
         });
 
-        const hiddenInputElement = document.querySelector('input[name="givenAnswer.questionType"][type="hidden"]');
-        if (hiddenInputElement) {
-            const questionTypeValue = hiddenInputElement.value;
+        const questionTypeValue = document.querySelector('input[name="givenAnswer.questionType"][type="hidden"]').value;
+        if (questionTypeValue) {
             if (questionTypeValue === "SINGLE_ANSWER") {
                 answerType = "[Jednokrotny wybór]";
             } else if (questionTypeValue === "MULTI_ANSWER") {
@@ -132,21 +147,63 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
 
         // Sprawdzenie czy pytanie i odpowiedzi już istnieją w local storage
         if (!checkIfDataExists(questionHTML, answersArray)) {
-            const newData = { questionHTML: questionHTML, answerType: answerType, answers: answersArray };
+            const Datatosave = { questionHTML: questionHTML, questionNumber: questionNumber, answerType: answerType, answers: answersArray };
 
             const existingDataandTestname = localStorage.getItem(`${today} ${testname}`);
             if (existingDataandTestname) {
                 const jsonData = JSON.parse(existingDataandTestname);
-                jsonData.push(newData);
+                jsonData.push(Datatosave);
                 localStorage.setItem(`${today} ${testname}`, JSON.stringify(jsonData));
             } else {
-                localStorage.setItem(`${today} ${testname}`, JSON.stringify([{ "Nazwa testu": testName, "Ilość pytań w teście": amountOfQuestions }, newData]));
+                localStorage.setItem(`${today} ${testname}`, JSON.stringify([{ "Nazwa testu": testName, "Ilość pytań w teście": amountOfQuestions }, Datatosave]));
             }
 
             console.log(`Zapisano pytanie i odpowiedzi w (local storage) dla testu "${today} ${testname}"`);
+
+                  
         } else {
             console.log(`Dla testu "${today} ${testname}" aktualne pytanie oraz odpowiedzi są już zapisane w (local storage)`);
         }
+        
+        //window.addEventListener("beforeunload", function() {
+//const questionTypeValue = document.querySelector('input[name="givenAnswer.questionType"][type="hidden"]').value;
+
+if (questionTypeValue === "SINGLE_ANSWER" || questionTypeValue === "MULTI_ANSWER" || questionTypeValue === "TRUE_FALSE" || questionTypeValue === "SURVEY") {
+    console.log("SAVE SELECTED ANSWER STARTED");
+
+    const inputs = document.querySelectorAll('.question_answers input[type="checkbox"], .question_answers input[type="radio"]');
+    const selectedanswersId = [];
+
+    inputs.forEach(input => {
+        if (input.checked) {
+            selectedanswersId.push(input.id);
+        }
+    });
+
+    const allselectedanswersids = selectedanswersId.join(', ');
+
+    console.log(allselectedanswersids);
+
+
+    if (allselectedanswersids) {
+        const DataToSaveWithSelectedAnswers = { NumberOfQuestionWithSelectedAnswer: questionNumber, SelectedAnswerType: answerType, IdsOfSelectedAnswer: allselectedanswersids };
+        const existingSaveWithSelectedAnswers = localStorage.getItem(`Selected_Answers ${today} ${testname}`);
+
+        if (existingSaveWithSelectedAnswers) {
+            let jsonData = JSON.parse(existingSaveWithSelectedAnswers);
+            // Filter out old entry for the same question
+            jsonData = jsonData.filter(entry => entry.NumberOfQuestionWithSelectedAnswer !== DataToSaveWithSelectedAnswers.NumberOfQuestionWithSelectedAnswer);
+            jsonData.push(DataToSaveWithSelectedAnswers);
+            localStorage.setItem(`Selected_Answers ${today} ${testname}`, JSON.stringify(jsonData));
+        } else {
+            localStorage.setItem(`Selected_Answers ${today} ${testname}`, JSON.stringify([DataToSaveWithSelectedAnswers]));
+        }
+    }
+}
+
+        //});
+
+
     }
 }
 
