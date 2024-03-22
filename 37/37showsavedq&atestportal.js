@@ -29,7 +29,7 @@ if (kluczeWzor.length === 0)
 } 
  else 
   {
-   console.log('Klucze o formacie ****-**-** w localStorage:');
+   //console.log('Klucze o formacie ****-**-** w localStorage:');
  
    const headerloginwrap = document.querySelector('.header-login-wrap');
    headerloginwrap.innerHTML = ''; 
@@ -164,8 +164,7 @@ if (kluczeWzor.length === 0)
         console.log('Wybrano wartość:', selectedValue);
   
         if (localStorage.getItem(selectedValue)) {
-          console.log(`Klucz ${selectedValue} istnieje w local storage.`);
-  
+          //console.log(`Klucz ${selectedValue} istnieje w local storage.`);
           const dataFromLocalStorage = localStorage.getItem(selectedValue);
   
           if (dataFromLocalStorage) {
@@ -211,9 +210,9 @@ if (kluczeWzor.length === 0)
                   if (key === "Nazwa testu") {
                     const h2 = document.createElement('h2')
                     const [rok, miesiac, dzien] = datatestu.split('-');
-                    const dataSkonwertowana = `${dzien}-${miesiac}-${rok}`;
-                    console.log(dataSkonwertowana)
-                    h2.innerHTML = `${key}: <br>${value} <br>Data zapisania testu: <br>${dataSkonwertowana}`;
+                    const skonwertowanaData = `${dzien}-${miesiac}-${rok}`;
+                    console.log(skonwertowanaData)
+                    h2.innerHTML = `${key}: <br>${value} <br>Data zapisania testu: <br>${skonwertowanaData}`;
                     container.appendChild(h2);
                   } else if (key === "Ilość pytań w teście") {
                     const spacer = document.createElement('hr');
@@ -260,7 +259,7 @@ if (kluczeWzor.length === 0)
                     container.appendChild(p);
                   } else if (key === "answers") {
                     const p = document.createElement('p');
-                    const answerType = obj["answerType"];
+                    let answerType = obj["answerType"];
                     if (answerType === "SINGLE_ANSWER") {
                         answerType = "[Jednokrotny wybór]";
                         } else if (answerType === "MULTI_ANSWER") {
