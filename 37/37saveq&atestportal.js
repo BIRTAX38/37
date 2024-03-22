@@ -94,7 +94,7 @@ function arraysEqual(arr1, arr2) {
 
 const questionId = document.querySelector('input[name="givenAnswer.id"][type="hidden"]').value;
 const questionEssenceElement = document.querySelector('.question_essence');
-const questionHTMLwithsearchengines = questionEssenceElement.outerHTML;
+const questionHTMLwithsearchengines = questionEssenceElement.innerHTML;
 const questionHTMLwithoutsearchengines = questionHTMLwithsearchengines.replace(/<div class="searchengines">.*?<\/div>/, '')
 .replace(/<div class="zoom-button-wrapper">.*?<\/div>/, '')
 .replace(/<div class="zoom-out-button-wrapper">.*?<\/div>/, '');
@@ -178,7 +178,7 @@ inputs.forEach(input => {
       if (answerIdhalfafterUnderlines !== -1) 
       {
        const answerId = answerIdfrominput.substring(answerIdhalfafterUnderlines + 1);
-       console.log(answerId);  
+       //console.log(answerId);  
        selectedanswersId.push(answerId);
       }
     }
@@ -186,7 +186,7 @@ inputs.forEach(input => {
 
 const allselectedanswersids = selectedanswersId.join(', ');
 
-console.log(allselectedanswersids);
+//console.log(allselectedanswersids);
 
 
 if (allselectedanswersids) 
