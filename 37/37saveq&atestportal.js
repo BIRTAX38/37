@@ -1,6 +1,5 @@
 function startsaveqandatestportal() {
 
-    /*
     if (!startsaveqandatestportalElement37) {
     let startsaveqandatestportalElement37 = document.createElement("div");
     startsaveqandatestportalElement37.id = "startsaveqanda37";
@@ -13,7 +12,6 @@ function startsaveqandatestportal() {
         console.log("Unikam ponownego uruchomienia skryptu w celu uniknięcia dodatkowych błędów");
         return
     }
-    */
 
     
 var elementonlywithNumberandamountofQuestion = document.querySelector('.question_header_content').innerHTML;
@@ -165,8 +163,7 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
             console.log(`Dla testu "${today} ${testname}" aktualne pytanie oraz odpowiedzi są już zapisane w (local storage)`);
         }
         
-        //window.addEventListener("beforeunload", function() {
-//const questionTypeValue = document.querySelector('input[name="givenAnswer.questionType"][type="hidden"]').value;
+        window.addEventListener("beforeunload", function() {
 
 if (questionTypeValue === "SINGLE_ANSWER" || questionTypeValue === "MULTI_ANSWER" || questionTypeValue === "TRUE_FALSE" || questionTypeValue === "SURVEY") {
     console.log("SAVE SELECTED ANSWER STARTED");
@@ -201,7 +198,7 @@ if (questionTypeValue === "SINGLE_ANSWER" || questionTypeValue === "MULTI_ANSWER
     }
 }
 
-        //});
+        });
 
 
     }
