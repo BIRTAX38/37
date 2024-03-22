@@ -164,7 +164,8 @@ if (!checkIfDataExists(questionHTML, answersHTML)) {
  }
 
 
-window.addEventListener("beforeunload", function() {
+ //Before unload
+//window.addEventListener("beforeunload", function() {
 if (questionTypeValue === "SINGLE_ANSWER" || questionTypeValue === "MULTI_ANSWER" || questionTypeValue === "TRUE_FALSE" || questionTypeValue === "SURVEY") {
 //console.log("SAVE SELECTED ANSWER STARTED");
 
@@ -173,7 +174,7 @@ const selectedanswersId = [];
 
 inputs.forEach(input => {
   if (input.checked) {
-    answerIdfrominput = input.id
+    const answerIdfrominput = input.id
     let answerIdhalfafterUnderlines = answerIdfrominput.indexOf('_');
       if (answerIdhalfafterUnderlines !== -1) 
       {
@@ -187,11 +188,32 @@ inputs.forEach(input => {
 const allselectedanswersids = selectedanswersId.join(', ');
 
 //console.log(allselectedanswersids);
-
-
 if (allselectedanswersids) 
   {
-    const DataToSaveWithSelectedAnswers = { NumberOfQuestionWithSelectedAnswer: questionNumber, questionId: questionId, SelectedAnswerType: questionTypeValue, IdsOfSelectedAnswers: allselectedanswersids };
+let DataToSaveWithSelectedAnswers = { NumberOfQuestionWithSelectedAnswer: questionNumber, questionId: questionId, SelectedAnswerType: questionTypeValue, IdsOfSelectedAnswers: allselectedanswersids };
+saveselectedanswerinlocalstorage(DataToSaveWithSelectedAnswers)
+  }
+}
+else
+{
+   if (questionTypeValue === "SHORT_ANSWER") 
+  {
+const inputElement = document.querySelector('input[id^="shortAnswerBody_"]');
+if (inputElement) {
+    const answerValue = inputElement.value;
+    console.log('Wartość z inputa:', answerValue);
+    if (answerValue) 
+  {
+    DataToSaveWithSelectedAnswers = { NumberOfQuestionWithSelectedAnswer: questionNumber, questionId: questionId, SelectedAnswerType: questionTypeValue, answerValue: answerValue };
+    saveselectedanswerinlocalstorage(DataToSaveWithSelectedAnswers)
+  }
+} else {
+    console.error('Nie znaleziono inputa.');
+}
+  }
+}
+function saveselectedanswerinlocalstorage (DataToSaveWithSelectedAnswers)
+{
     const existingSaveWithSelectedAnswers = localStorage.getItem(`Sel_Answ ${today} ${testName}`);
 
     if (existingSaveWithSelectedAnswers) {
@@ -205,10 +227,11 @@ if (allselectedanswersids)
       {
        localStorage.setItem(`Sel_Answ ${today} ${testName}`, JSON.stringify([DataToSaveWithSelectedAnswers]));
       }
-  }
+  
 }
 
-    });
+    //});
+    //Before unload
   }
 }
 
