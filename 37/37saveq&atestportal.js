@@ -8,44 +8,52 @@ saveqandatestportalElement37.style.display = "none";
 let body = document.querySelector("body");
 body.appendChild(saveqandatestportalElement37);
 }
-else
-{
-    console.log("Unikam ponownego uruchomienia skryptu w celu uniknięcia dodatkowych błędów");
-    return
-}
+ else
+ {
+   console.log("Unikam ponownego uruchomienia skryptu w celu uniknięcia dodatkowych błędów");
+   return
+ }
+
 const testName = document.querySelector('.test-name').innerText;
 if (!testName)
-{return}
+{
+  return
+}
+
 
 if ((window.location.href.includes("DoStartTest.html") || window.location.href.includes("DoTestQuestion.html") || window.location.href.includes("LoadQuestion.html") || window.location.href.includes("StartNextAttempt.html")) && testName) {
 
 let loadingimages = document.querySelectorAll('.lazy');
 loadingimages.forEach(function(img) {
 var dataSrc = img.getAttribute('data-src');
-if (dataSrc) {
+if (dataSrc) 
+    {
     img.setAttribute('src', dataSrc);
     img.classList.remove('lazy');
-}
+    }
 });
-
 
 
 var elementonlywithNumberandamountofQuestion = document.querySelector('.question_header_content').innerHTML;
 var spaceIndex = elementonlywithNumberandamountofQuestion.indexOf(' ');
 if (spaceIndex !== -1) {
-    var NumberandamountofQuestion = elementonlywithNumberandamountofQuestion.substring(spaceIndex + 1);
-    var slashIndex = NumberandamountofQuestion.indexOf('/');
-    if (slashIndex !== -1) {
-    var questionNumber = NumberandamountofQuestion.substring(0, slashIndex).trim(); 
-    var amountOfQuestions = NumberandamountofQuestion.substring(slashIndex + 1).trim(); 
-    console.log("Numer pytania: " + questionNumber);
-    console.log("Liczba pytań: " + amountOfQuestions);
-    } else {
-    console.log("Brak slasha w tekście po spacji.");
+  var NumberandamountofQuestion = elementonlywithNumberandamountofQuestion.substring(spaceIndex + 1);
+  var slashIndex = NumberandamountofQuestion.indexOf('/');
+  if (slashIndex !== -1) {
+  var questionNumber = NumberandamountofQuestion.substring(0, slashIndex).trim(); 
+  var amountOfQuestions = NumberandamountofQuestion.substring(slashIndex + 1).trim(); 
+  console.log("Numer pytania: " + questionNumber);
+  console.log("Liczba pytań: " + amountOfQuestions);
+  }
+    else
+    {
+       console.log("Brak slasha w tekście po spacji.");
     }
-} else {
+} 
+ else 
+ {
     console.log("Brak spacji w tekście.");
-}
+ }
 
 
 function checkIfDataExists(questionHTML, answersHTML) {
@@ -69,7 +77,6 @@ function checkIfDataExists(questionHTML, answersHTML) {
 }
 
 
-
 function arraysEqual(arr1, arr2) {
   if (arr1.length !== arr2.length) {
     return false;
@@ -84,6 +91,7 @@ function arraysEqual(arr1, arr2) {
   return true;
 }
 
+
 const questionId = document.querySelector('input[name="givenAnswer.id"][type="hidden"]').value;
 const questionEssenceElement = document.querySelector('.question_essence');
 const questionHTMLwithsearchengines = questionEssenceElement.outerHTML;
@@ -95,35 +103,35 @@ const questionHTML = `<label questionid="${questionId}" class="savedquestion37">
 const questionAnswers = document.querySelector('.question_answers');
 
 if (questionHTML && questionAnswers) {
-     const answerContainers = questionAnswers.querySelectorAll('.answer_container');
-     const answersHTML = [];
-     let answerType = "";    
-     answerContainers.forEach((answerContainer) => {
-     const answer_wrap = answerContainer.querySelector('.question_answer_wrap');
-     if (answer_wrap.getAttribute('for')) {
-     const answerIdfromfor = answer_wrap.getAttribute('for')
-     //console.log(forvalue);
-     let answerIdhalfafterUnderlines = answerIdfromfor.indexOf('_'); 
-     if (answerIdhalfafterUnderlines !== -1) {
-     const answerId = answerIdfromfor.substring(answerIdhalfafterUnderlines + 1);
-     //console.log(answerId);
-     
-     const answerBody = answerContainer.querySelector('.answer_body');
-     if (answerBody) {
-     const answerHTMLwithsearchenginesetc = answerBody.innerHTML.trim();
-     const answerHTML = answerHTMLwithsearchenginesetc.replace(/<div class="searchengines">.*?<\/div>/, '')
-     .replace(/<div class="zoom-button-wrapper">.*?<\/div>/, '')
-     .replace(/<div class="zoom-out-button-wrapper">.*?<\/div>/, '')
-     .replace(/\n\n&nbsp;/g, '');
-     answersHTML.push(`<label answerid="${answerId}" class="savedanswer37">${answerHTML}</label>`);
+  const answerContainers = questionAnswers.querySelectorAll('.answer_container');
+  const answersHTML = [];
+  answerContainers.forEach((answerContainer) => {
+  const answer_wrap = answerContainer.querySelector('.question_answer_wrap');
+  if (answer_wrap.getAttribute('for')) {
+  const answerIdfromfor = answer_wrap.getAttribute('for')
+  //console.log(forvalue);
+  let answerIdhalfafterUnderlines = answerIdfromfor.indexOf('_'); 
+  if (answerIdhalfafterUnderlines !== -1) {
+  const answerId = answerIdfromfor.substring(answerIdhalfafterUnderlines + 1);
+  //console.log(answerId);
+  
+  const answerBody = answerContainer.querySelector('.answer_body');
+  if (answerBody) {
+  const answerHTMLwithsearchenginesetc = answerBody.innerHTML.trim();
+  const answerHTML = answerHTMLwithsearchenginesetc.replace(/<div class="searchengines">.*?<\/div>/, '')
+  .replace(/<div class="zoom-button-wrapper">.*?<\/div>/, '')
+  .replace(/<div class="zoom-out-button-wrapper">.*?<\/div>/, '')
+  .replace(/\n\n&nbsp;/g, '');
+  answersHTML.push(`<label answerid="${answerId}" class="savedanswer37">${answerHTML}</label>`);
     }
   }
 } 
-else 
-{
-console.log("Podłoga nie została znaleziona.");
-}
+ else
+ {
+   console.log("Podłoga nie została znaleziona.");
+ }
 });
+
 
 const questionTypeValue = document.querySelector('input[name="givenAnswer.questionType"][type="hidden"]').value;     
 
@@ -150,15 +158,15 @@ if (!checkIfDataExists(questionHTML, answersHTML)) {
     }
    console.log(`Zapisano pytanie i odpowiedzi w (local storage) dla testu "${today} ${testName}"`);
 }
-else 
-{
- console.log(`Dla testu "${today} ${testName}" aktualne pytanie oraz odpowiedzi są już zapisane w (local storage)`);
-}
+ else 
+ {
+   console.log(`Dla testu "${today} ${testName}" aktualne pytanie oraz odpowiedzi są już zapisane w (local storage)`);
+ }
 
 
 window.addEventListener("beforeunload", function() {
 if (questionTypeValue === "SINGLE_ANSWER" || questionTypeValue === "MULTI_ANSWER" || questionTypeValue === "TRUE_FALSE" || questionTypeValue === "SURVEY") {
-console.log("SAVE SELECTED ANSWER STARTED");
+//console.log("SAVE SELECTED ANSWER STARTED");
 
 const inputs = document.querySelectorAll('.question_answers input[type="checkbox"], .question_answers input[type="radio"]');
 const selectedanswersId = [];
@@ -193,10 +201,10 @@ if (allselectedanswersids)
     jsonData.push(DataToSaveWithSelectedAnswers);
     localStorage.setItem(`Sel_Answ ${today} ${testName}`, JSON.stringify(jsonData));
     } 
-    else
-    {
-      localStorage.setItem(`Sel_Answ ${today} ${testName}`, JSON.stringify([DataToSaveWithSelectedAnswers]));
-    }
+      else
+      {
+       localStorage.setItem(`Sel_Answ ${today} ${testName}`, JSON.stringify([DataToSaveWithSelectedAnswers]));
+      }
   }
 }
 
