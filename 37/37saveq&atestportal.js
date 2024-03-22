@@ -1,5 +1,18 @@
 function startsaveqandatestportal() {
 
+    if (!startsaveqandatestportalElement37) {
+    let startsaveqandatestportalElement37 = document.createElement("div");
+    startsaveqandatestportalElement37.id = "startsaveqanda37";
+    startsaveqandatestportalElement37.style.display = "none";
+    let body = document.querySelector("body");
+    body.appendChild(startsaveqandatestportalElement37);
+    }
+    else
+    {
+        console.log("Unikam ponownego uruchomienia skryptu w celu uniknięcia dodatkowych błędów");
+        return
+    }
+
 // Funkcja do formatowania odpowiedzi w żądany sposób
 var testname = document.querySelector('.test-name').innerText;
 
@@ -70,15 +83,21 @@ if ((window.location.href.includes("DoStartTest.html") || window.location.href.i
         let answerType = "";
 
         answerContainers.forEach((answerContainer) => {
+            const answer_wrap = answerContainer.querySelector('.question_answer_wrap');
+            if (answer_wrap.getAttribute('for')) {
+                // Jeśli tak, wypisz wartość atrybutu 'for' do konsoli
+                const forvalue = answer_wrap.getAttribute('for')
+                //console.log(forvalue);
+            
             const answerBody = answerContainer.querySelector('.answer_body');
             if (answerBody) {
                 const answerHTMLwithsearchenginesetc = answerBody.innerHTML.trim();
                 const answerHTML = answerHTMLwithsearchenginesetc.replace(/<div class="searchengines">.*?<\/div>/, '')
                 .replace(/<div class="zoom-button-wrapper">.*?<\/div>/, '')
                 .replace(/<div class="zoom-out-button-wrapper">.*?<\/div>/, '')
-                .replace(/&nbsp;/g, '');
-                    answersArray.push(answerHTML);
-                
+                .replace(/\n\n&nbsp;/g, '');
+                    answersArray.push(`<label for="${forvalue}" class="savedanswer37">${answerHTML}</label>`);
+                }
             }
         });
 
