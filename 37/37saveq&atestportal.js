@@ -169,6 +169,7 @@ if (!checkIfDataExists(questionHTML, answersHTML)) {
 
 
  //Before unload
+ /////////////////////////////////////////////////Save selected answers/////////////////////////////////////////////////
 window.addEventListener("beforeunload", function() {
 if (questionTypeValue === "SINGLE_ANSWER" || questionTypeValue === "MULTI_ANSWER" || questionTypeValue === "TRUE_FALSE" || questionTypeValue === "SURVEY") {
 //console.log("SAVE SELECTED ANSWER STARTED");
@@ -190,7 +191,6 @@ inputs.forEach(input => {
 });
 
 const allselectedanswersids = selectedanswersId.join(', ');
-
 //console.log(allselectedanswersids);
 if (allselectedanswersids) 
   {
@@ -198,24 +198,27 @@ let DataToSaveWithSelectedAnswers = { NumberOfQuestionWithSelectedAnswer: questi
 saveselectedanswerinlocalstorage(DataToSaveWithSelectedAnswers)
   }
 }
-else
+});
+
+
+if (questionTypeValue === "SHORT_ANSWER") 
 {
-   if (questionTypeValue === "SHORT_ANSWER") 
-  {
+    setInterval(() => {
 const inputElement = document.querySelector('input[id^="shortAnswerBody_"]');
 if (inputElement) {
-    const answerValue = inputElement.value;
-    console.log('Wartość z inputa:', answerValue);
-    if (answerValue) 
-  {
-    DataToSaveWithSelectedAnswers = { NumberOfQuestionWithSelectedAnswer: questionNumber, questionId: questionId, SelectedAnswerType: questionTypeValue, answerValue: answerValue };
-    saveselectedanswerinlocalstorage(DataToSaveWithSelectedAnswers)
-  }
+  const answerValue = inputElement.value;
+  console.log('Wartość z inputa:', answerValue);
+  if (answerValue) 
+{
+  let DataToSaveWithSelectedAnswers = { NumberOfQuestionWithSelectedAnswer: questionNumber, questionId: questionId, SelectedAnswerType: questionTypeValue, answerValue: answerValue };
+  saveselectedanswerinlocalstorage(DataToSaveWithSelectedAnswers)
+}
 } else {
-    console.error('Nie znaleziono inputa.');
+  console.error('Nie znaleziono inputa.');
 }
-  }
+}, 500);
 }
+
 function saveselectedanswerinlocalstorage (DataToSaveWithSelectedAnswers)
 {
     const existingSaveWithSelectedAnswers = localStorage.getItem(`Other_Info ${today} ${testName}`);
@@ -233,9 +236,8 @@ function saveselectedanswerinlocalstorage (DataToSaveWithSelectedAnswers)
       }
   
 }
-
-    });
-    //Before unload
+/////////////////////////////////////////////////Save selected answers/////////////////////////////////////////////////
+    
   }
 }
 else
