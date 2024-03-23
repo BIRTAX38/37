@@ -214,18 +214,18 @@ if (inputElement) {
 }
 function saveselectedanswerinlocalstorage (DataToSaveWithSelectedAnswers)
 {
-    const existingSaveWithSelectedAnswers = localStorage.getItem(`Sel_Answ ${today} ${testName}`);
+    const existingSaveWithSelectedAnswers = localStorage.getItem(`Other_Info ${today} ${testName}`);
 
     if (existingSaveWithSelectedAnswers) {
     let jsonData = JSON.parse(existingSaveWithSelectedAnswers);
     // Filter out old entry for the same question
     jsonData = jsonData.filter(entry => entry.NumberOfQuestionWithSelectedAnswer !== DataToSaveWithSelectedAnswers.NumberOfQuestionWithSelectedAnswer);
     jsonData.push(DataToSaveWithSelectedAnswers);
-    localStorage.setItem(`Sel_Answ ${today} ${testName}`, JSON.stringify(jsonData));
+    localStorage.setItem(`Other_Info ${today} ${testName}`, JSON.stringify(jsonData));
     } 
       else
       {
-       localStorage.setItem(`Sel_Answ ${today} ${testName}`, JSON.stringify([DataToSaveWithSelectedAnswers]));
+       localStorage.setItem(`Other_Info ${today} ${testName}`, JSON.stringify([DataToSaveWithSelectedAnswers]));
       }
   
 }
