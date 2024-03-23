@@ -226,7 +226,7 @@ function saveselectedanswerinlocalstorage (DataToSaveWithSelectedAnswers)
     if (existingSaveWithSelectedAnswers) {
     let jsonData = JSON.parse(existingSaveWithSelectedAnswers);
     // Filter out old entry for the same question
-    jsonData = jsonData.filter(entry => entry.NumberOfQuestionWithSelectedAnswer !== DataToSaveWithSelectedAnswers.NumberOfQuestionWithSelectedAnswer);
+    jsonData = jsonData.filter(entry => entry.questionId !== DataToSaveWithSelectedAnswers.questionId);
     jsonData.push(DataToSaveWithSelectedAnswers);
     localStorage.setItem(`Other_Info ${today} ${testName}`, JSON.stringify(jsonData));
     } 
