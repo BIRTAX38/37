@@ -24,6 +24,12 @@ body.appendChild(saveqandatestportalElement37);
    return;
  }
 
+ const today = new Date().toLocaleDateString('en-CA', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+}).replace(/\//g, '-');
+
 
 if ((window.location.href.includes("DoStartTest.html") || window.location.href.includes("DoTestQuestion.html") || window.location.href.includes("LoadQuestion.html") || window.location.href.includes("StartNextAttempt.html")) && testName) {
 
@@ -61,11 +67,6 @@ if (spaceIndex !== -1) {
 
 
 function checkIfDataExists(questionHTML, answersHTML) {
-  const today = new Date().toLocaleDateString('en-CA', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-  }).replace(/\//g, '-');
   const existingDataandTestname = localStorage.getItem(`${today} ${testName}`);
   
   if (existingDataandTestname) {
@@ -138,12 +139,6 @@ if (questionHTML && questionAnswers) {
 
 
 const questionTypeValue = document.querySelector('input[name="givenAnswer.questionType"][type="hidden"]').value;     
-
-const today = new Date().toLocaleDateString('en-CA', {
-year: 'numeric',
-month: '2-digit',
-day: '2-digit'
-}).replace(/\//g, '-');
 
 // Sprawdzenie czy pytanie i odpowiedzi już istnieją w local storage
 if (!checkIfDataExists(questionHTML, answersHTML)) {
