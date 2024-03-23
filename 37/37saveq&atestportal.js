@@ -17,7 +17,7 @@ body.appendChild(saveqandatestportalElement37);
 
  let testNameElement = document.querySelector('.test-name');
  let testName;
- 
+
  if (testNameElement) {
    testName = testNameElement.innerText;
  } else {
@@ -33,10 +33,12 @@ body.appendChild(saveqandatestportalElement37);
 
 if ((window.location.href.includes("DoStartTest.html") || window.location.href.includes("DoTestQuestion.html") || window.location.href.includes("LoadQuestion.html") || window.location.href.includes("StartNextAttempt.html")) && testName) {
 
+
+
 let loadingimages = document.querySelectorAll('.lazy');
 loadingimages.forEach(function(img) {
 var dataSrc = img.getAttribute('data-src');
-if (dataSrc) 
+if (dataSrc)
     {
     img.setAttribute('src', dataSrc);
     img.classList.remove('lazy');
@@ -50,8 +52,8 @@ if (spaceIndex !== -1) {
   var NumberandamountofQuestion = elementonlywithNumberandamountofQuestion.substring(spaceIndex + 1);
   var slashIndex = NumberandamountofQuestion.indexOf('/');
   if (slashIndex !== -1) {
-  var questionNumber = NumberandamountofQuestion.substring(0, slashIndex).trim(); 
-  var amountOfQuestions = NumberandamountofQuestion.substring(slashIndex + 1).trim(); 
+  var questionNumber = NumberandamountofQuestion.substring(0, slashIndex).trim();
+  var amountOfQuestions = NumberandamountofQuestion.substring(slashIndex + 1).trim();
   console.log("Numer pytania: " + questionNumber);
   console.log("Liczba pytań: " + amountOfQuestions);
   }
@@ -59,8 +61,8 @@ if (spaceIndex !== -1) {
     {
        console.log("Brak slasha w tekście po spacji.");
     }
-} 
- else 
+}
+ else
  {
     console.log("Brak spacji w tekście.");
  }
@@ -68,10 +70,10 @@ if (spaceIndex !== -1) {
 
 function checkIfDataExists(questionHTML, answersHTML) {
   const existingDataandTestname = localStorage.getItem(`${today} ${testName}`);
-  
+
   if (existingDataandTestname) {
       const jsonData = JSON.parse(existingDataandTestname);
-  
+
       for (const data of jsonData) {
           if (data.questionHTML === questionHTML && arraysEqual(data.answers, answersHTML)) {
               return true;
@@ -86,13 +88,13 @@ function arraysEqual(arr1, arr2) {
   if (arr1.length !== arr2.length) {
     return false;
   }
-  
+
   for (let i = 0; i < arr1.length; i++) {
     if (arr1[i] !== arr2[i]) {
       return false;
     }
   }
-  
+
   return true;
 }
 
@@ -115,11 +117,11 @@ if (questionHTML && questionAnswers) {
   if (answer_wrap.getAttribute('for')) {
   const answerIdfromfor = answer_wrap.getAttribute('for')
   //console.log(forvalue);
-  let answerIdhalfafterUnderlines = answerIdfromfor.indexOf('_'); 
+  let answerIdhalfafterUnderlines = answerIdfromfor.indexOf('_');
   if (answerIdhalfafterUnderlines !== -1) {
   const answerId = answerIdfromfor.substring(answerIdhalfafterUnderlines + 1);
   //console.log(answerId);
-  
+
   const answerBody = answerContainer.querySelector('.answer_body');
   if (answerBody) {
   const answerHTMLwithsearchenginesetc = answerBody.innerHTML.trim();
@@ -130,7 +132,7 @@ if (questionHTML && questionAnswers) {
   answersHTML.push(`<label answerid="${answerId}" class="savedanswer37">${answerHTML}</label>`);
     }
   }
-} 
+}
  else
  {
    console.log("Podłoga nie została znaleziona.");
@@ -138,26 +140,36 @@ if (questionHTML && questionAnswers) {
 });
 
 
-const questionTypeValue = document.querySelector('input[name="givenAnswer.questionType"][type="hidden"]').value;     
+const questionType = document.querySelector('input[name="givenAnswer.questionType"][type="hidden"]').value;
 
 // Sprawdzenie czy pytanie i odpowiedzi już istnieją w local storage
 if (!checkIfDataExists(questionHTML, answersHTML)) {
-  const Datatosave = { questionHTML: questionHTML, questionId: questionId, questionNumber: questionNumber, answerType: questionTypeValue, answers: answersHTML };
-
+    let Datatosave = {}
+    Datatosave = { questionHTML: questionHTML, questionId: questionId, questionNumber: questionNumber, answerType: questionType, answers: answersHTML };
+if (questionType === "SINGLE_ANSWER" || questionType === "TRUE_FALSE" || questionType === "SURVEY") {
+  Datatosave.idOfSelectedAnswer = null;
+}
+if (questionType === "MULTI_ANSWER") {
+    Datatosave.idsOfSelectedAnswers = null;
+  }
+if (questionType === "SHORT_ANSWER") {
+    Datatosave.typedAnswer = null;
+}
+console.log(Datatosave)
   const existingDataandTestname = localStorage.getItem(`${today} ${testName}`);
-  if (existingDataandTestname) 
+  if (existingDataandTestname)
   {
     const jsonData = JSON.parse(existingDataandTestname);
     jsonData.push(Datatosave);
     localStorage.setItem(`${today} ${testName}`, JSON.stringify(jsonData));
-  } 
+  }
     else
     {
      localStorage.setItem(`${today} ${testName}`, JSON.stringify([{ "Nazwa testu": testName, "Ilość pytań w teście": amountOfQuestions }, Datatosave]));
     }
    console.log(`Zapisano pytanie i odpowiedzi w (local storage) dla testu "${today} ${testName}"`);
 }
- else 
+ else
  {
    console.log(`Dla testu "${today} ${testName}" aktualne pytanie oraz odpowiedzi są już zapisane w (local storage)`);
  }
@@ -166,80 +178,96 @@ if (!checkIfDataExists(questionHTML, answersHTML)) {
  //Before unload
  /////////////////////////////////////////////////Save selected answers/////////////////////////////////////////////////
 window.addEventListener("beforeunload", function() {
-if (questionTypeValue === "SINGLE_ANSWER" || questionTypeValue === "MULTI_ANSWER" || questionTypeValue === "TRUE_FALSE" || questionTypeValue === "SURVEY") {
-//console.log("SAVE SELECTED ANSWER STARTED");
+    if (questionType === "SINGLE_ANSWER" || questionType === "MULTI_ANSWER" || questionType === "TRUE_FALSE" || questionType === "SURVEY") {
+        const inputs = document.querySelectorAll('.question_answers input[type="checkbox"], .question_answers input[type="radio"]');
+        const selectedanswersId = [];
 
-const inputs = document.querySelectorAll('.question_answers input[type="checkbox"], .question_answers input[type="radio"]');
-const selectedanswersId = [];
+        inputs.forEach(input => {
+            if (input.checked) {
+                const answerIdfrominput = input.id;
+                let answerIdhalfafterUnderlines = answerIdfrominput.indexOf('_');
+                if (answerIdhalfafterUnderlines !== -1) {
+                    const answerId = answerIdfrominput.substring(answerIdhalfafterUnderlines + 1);
+                    //console.log(answerId);
+                    selectedanswersId.push(answerId);
+                }
+            }
+        });
 
-inputs.forEach(input => {
-  if (input.checked) {
-    const answerIdfrominput = input.id
-    let answerIdhalfafterUnderlines = answerIdfrominput.indexOf('_');
-      if (answerIdhalfafterUnderlines !== -1) 
-      {
-       const answerId = answerIdfrominput.substring(answerIdhalfafterUnderlines + 1);
-       //console.log(answerId);  
-       selectedanswersId.push(answerId);
-      }
+        const allselectedanswersids = selectedanswersId.join(', ');
+        if (allselectedanswersids) {
+            if (questionType === "SINGLE_ANSWER" || questionType === "TRUE_FALSE" || questionType === "SURVEY") {
+                const Changedata = saveselectedanswersinlocalstorage(allselectedanswersids, "idOfSelectedAnswer")
+                                    
+                if (Changedata) {
+                    console.log("Zaktualizowano obiekt:", Changedata);
+                } else {
+                    console.log("Nie znaleziono obiektu o podanym questionId:", questionIdDoZmiany);
+                } 
+              }
+              if (questionType === "MULTI_ANSWER") {
+                const Changedata = saveselectedanswersinlocalstorage(allselectedanswersids, "idsOfSelectedAnswers")
+                                    
+                if (Changedata) {
+                    console.log("Zaktualizowano obiekt:", Changedata);
+                } else {
+                    console.log("Nie znaleziono obiektu o podanym questionId:", questionIdDoZmiany);
+                } 
+                }
+        }
     }
 });
 
-const allselectedanswersids = selectedanswersId.join(', ');
-//console.log(allselectedanswersids);
-if (allselectedanswersids) 
-  {
-let DataToSaveWithSelectedAnswers = { NumberOfQuestionWithSelectedAnswer: questionNumber, questionId: questionId, SelectedAnswerType: questionTypeValue, IdsOfSelectedAnswers: allselectedanswersids };
-saveselectedanswerinlocalstorage(DataToSaveWithSelectedAnswers)
-  }
-}
-});
-
-
-if (questionTypeValue === "SHORT_ANSWER") 
-{
+if (questionType === "SHORT_ANSWER") {
     setInterval(() => {
-const inputElement = document.querySelector('input[id^="shortAnswerBody_"]');
-if (inputElement) {
-  const answerValue = inputElement.value;
-  console.log('Wartość z inputa:', answerValue);
-  if (answerValue) 
-{
-  let DataToSaveWithSelectedAnswers = { NumberOfQuestionWithSelectedAnswer: questionNumber, questionId: questionId, SelectedAnswerType: questionTypeValue, answerValue: answerValue };
-  saveselectedanswerinlocalstorage(DataToSaveWithSelectedAnswers)
-}
-} else {
-  console.error('Nie znaleziono inputa.');
-}
-}, 500);
+        const inputElement = document.querySelector('input[id^="shortAnswerBody_"]');
+        if (inputElement) {
+            const typedAnswer = inputElement.value;
+            //console.log('Wartość z inputa:', typedAnswer);
+            if (typedAnswer) {
+                const Changedata = saveselectedanswersinlocalstorage(typedAnswer, "typedAnswer")
+                    
+                if (Changedata) {
+                    console.log("Zaktualizowano obiekt:", Changedata);
+                } else {
+                    console.log("Nie znaleziono obiektu o podanym questionId:", questionIdDoZmiany);
+                } 
+            }
+        } else {
+            console.error('Nie znaleziono inputa.');
+        }
+    }, 500);
 }
 
-function saveselectedanswerinlocalstorage (DataToSaveWithSelectedAnswers)
-{
-    const existingSaveWithSelectedAnswers = localStorage.getItem(`Other_Info ${today} ${testName}`);
-
-    if (existingSaveWithSelectedAnswers) {
-    let jsonData = JSON.parse(existingSaveWithSelectedAnswers);
-    // Filter out old entry for the same question
-    jsonData = jsonData.filter(entry => entry.questionId !== DataToSaveWithSelectedAnswers.questionId);
-    jsonData.push(DataToSaveWithSelectedAnswers);
-    localStorage.setItem(`Other_Info ${today} ${testName}`, JSON.stringify(jsonData));
-    } 
-      else
-      {
-       localStorage.setItem(`Other_Info ${today} ${testName}`, JSON.stringify([DataToSaveWithSelectedAnswers]));
-      }
-  
+function saveselectedanswersinlocalstorage(Data, Keytochange) {
+    const localStorageData = localStorage.getItem(`${today} ${testName}`);
+    if (localStorageData) {
+        const parsedData = JSON.parse(localStorageData);
+        for (let i = 0; i < parsedData.length; i++) {
+            const obj = parsedData[i];
+            if (obj.questionId && obj.questionId === questionId) {
+                obj[Keytochange] = Data; // Ustawiamy właściwość obiektu na podstawie wartości zmiennej Keytochange
+                localStorage.setItem(`${today} ${testName}`, JSON.stringify(parsedData));
+                return obj;
+            }
+        }
+        return null;
+    } else {
+        return null;
+    }
 }
+
+   
+
 /////////////////////////////////////////////////Save selected answers/////////////////////////////////////////////////
-    
+
   }
 }
 else
 {
-    if (window.location.href.includes("/exam/test-result.html")) 
+    if (window.location.href.includes("/exam/test-result.html"))
     {
-        console.log("Zapisywanie % zdanego testu i ilości zdobytych punktów za 3s")   
+        console.log("Zapisywanie % zdanego testu i ilości zdobytych punktów za 3s")
         setTimeout(() => {
 const percentageDiv = document.querySelector('.mdc-typography--headline6.donut-main-value.donut-percents');
 const pointsDiv = document.querySelector('.mdc-typography--body1.donut-sub-value');
@@ -256,23 +284,23 @@ if (percentageDiv && pointsDiv) {
    let yyyymmdd = elements[elements.length - 1].textContent.trim();
    yyyymmddandtestName = `${yyyymmdd} ${testName}`;
    console.log(yyyymmddandtestName);
-   const existingDataandTestname = localStorage.getItem(`Other_Info ${yyyymmddandtestName}`);
-   if (existingDataandTestname) 
+   const existingDataandTestname = localStorage.getItem(`${yyyymmddandtestName}`);
+   if (existingDataandTestname)
    {
-       const Datatosave = { scorePercents: scorePercents, score: score }; 
+       const Datatosave = { scorePercents: scorePercents, score: score };
      const jsonData = JSON.parse(existingDataandTestname);
      jsonData.push(Datatosave);
-     localStorage.setItem(`Other_Info ${yyyymmddandtestName}`, JSON.stringify(jsonData));
-     
-   } 
+     localStorage.setItem(`${yyyymmddandtestName}`, JSON.stringify(jsonData));
+
+   }
    else
    {
        console.log("Klucz nie istnieje w local storage")
    }
 }
 
-} 
-else 
+}
+else
 {
     console.log('Nie znaleziono wymaganych elementów div.');
 }
