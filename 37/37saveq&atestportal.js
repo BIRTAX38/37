@@ -14,11 +14,15 @@ body.appendChild(saveqandatestportalElement37);
    return
  }
 
-const testName = document.querySelector('.test-name').innerText;
-if (!testName)
-{
-  return
-}
+
+ let testNameElement = document.querySelector('.test-name');
+ let testName;
+ 
+ if (testNameElement) {
+   testName = testNameElement.innerText;
+ } else {
+   return;
+ }
 
 
 if ((window.location.href.includes("DoStartTest.html") || window.location.href.includes("DoTestQuestion.html") || window.location.href.includes("LoadQuestion.html") || window.location.href.includes("StartNextAttempt.html")) && testName) {
@@ -165,7 +169,7 @@ if (!checkIfDataExists(questionHTML, answersHTML)) {
 
 
  //Before unload
-//window.addEventListener("beforeunload", function() {
+window.addEventListener("beforeunload", function() {
 if (questionTypeValue === "SINGLE_ANSWER" || questionTypeValue === "MULTI_ANSWER" || questionTypeValue === "TRUE_FALSE" || questionTypeValue === "SURVEY") {
 //console.log("SAVE SELECTED ANSWER STARTED");
 
@@ -230,10 +234,58 @@ function saveselectedanswerinlocalstorage (DataToSaveWithSelectedAnswers)
   
 }
 
-    //});
+    });
     //Before unload
   }
 }
+else
+{
+    if (window.location.href.includes("/exam/test-result.html")) 
+    {
+        console.log("Zapisywanie % zdanego testu i ilości zdobytych punktów za 3s")   
+        setTimeout(() => {
+const percentageDiv = document.querySelector('.mdc-typography--headline6.donut-main-value.donut-percents');
+const pointsDiv = document.querySelector('.mdc-typography--body1.donut-sub-value');
+
+if (percentageDiv && pointsDiv) {
+   const scorePercents = percentageDiv.textContent.trim();
+   const score = pointsDiv.textContent.trim();
+   console.log('scorePercents:', scorePercents);
+   console.log('score:', score);
+   const elements = document.querySelectorAll('.timer-tile-properties-container .mdc-property-value');
+   const testName = document.querySelector('.test-name').innerText;
+   let yyyymmddandtestName;
+   if (elements.length > 0) {
+   let yyyymmdd = elements[elements.length - 1].textContent.trim();
+   yyyymmddandtestName = `${yyyymmdd} ${testName}`;
+   console.log(yyyymmddandtestName);
+   const existingDataandTestname = localStorage.getItem(`Other_Info ${yyyymmddandtestName}`);
+   if (existingDataandTestname) 
+   {
+       const Datatosave = { scorePercents: scorePercents, score: score }; 
+     const jsonData = JSON.parse(existingDataandTestname);
+     jsonData.push(Datatosave);
+     localStorage.setItem(`Other_Info ${yyyymmddandtestName}`, JSON.stringify(jsonData));
+     
+   } 
+   else
+   {
+       console.log("Klucz nie istnieje w local storage")
+   }
+}
+
+} 
+else 
+{
+    console.log('Nie znaleziono wymaganych elementów div.');
+}
+
+
+}, 3000);
+}
+
+}
+
 
 }
 
