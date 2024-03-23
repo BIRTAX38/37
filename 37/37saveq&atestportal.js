@@ -246,7 +246,7 @@ function saveselectedanswersinlocalstorage(Data, Keytochange) {
         for (let i = 0; i < parsedData.length; i++) {
             const obj = parsedData[i];
             if (obj.questionId && obj.questionId === questionId) {
-                obj[Keytochange] = Data; // Ustawiamy właściwość obiektu na podstawie wartości zmiennej Keytochange
+                obj[Keytochange] = Data;
                 localStorage.setItem(`${today} ${testName}`, JSON.stringify(parsedData));
                 return obj;
             }
