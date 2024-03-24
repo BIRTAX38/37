@@ -268,10 +268,35 @@ function saveselectedanswersinlocalstorage(Data, Keytochange) {
 }
 else
 {
-    if (window.location.href.includes("/exam/test-result.html"))
-    {
+  if (window.location.href.includes("/exam/test-result.html"))
+{
         console.log("Zapisywanie % zdanego testu i ilości zdobytych punktów za 5s")
         setTimeout(() => {
+
+const timerTile = document.querySelector('.timer-tile');
+let startofwritingtesttime = "";
+let endofwritingtesttime = "";
+let totaltestwritingtime = "";
+
+if (timerTile) {
+    const timeValues = timerTile.querySelectorAll('.mdc-property-value');
+    timeValues.forEach(value => {
+        const timeText = value.textContent.trim();
+        if (timeText.includes(":")) {
+            if (startofwritingtesttime === "") startofwritingtesttime = timeText;
+            else if (endofwritingtesttime === "") endofwritingtesttime = timeText;
+        }
+    });
+    totaltestwritingtime = timerTile.querySelector('.configuration-progress__text').textContent.trim();
+
+    console.log('startofwritingtesttime:', startofwritingtesttime);
+    console.log('endofwritingtesttime:', endofwritingtesttime);
+    console.log('totaltestwritingtime:', totaltestwritingtime);
+} else {
+    console.log('Nie znaleziono elementu o klasie "timer-tile".');
+}
+
+
 const percentageDiv = document.querySelector('.mdc-typography--headline6.donut-main-value.donut-percents');
 const pointsDiv = document.querySelector('.mdc-typography--body1.donut-sub-value');
 
@@ -286,15 +311,32 @@ if (percentageDiv && pointsDiv) {
    if (elements.length > 0) {
    let yyyymmdd = elements[elements.length - 1].textContent.trim();
    yyyymmddandtestName = `${yyyymmdd} ${testName}`;
-   console.log(yyyymmddandtestName);
+   //console.log(yyyymmddandtestName);
    const existingDataandTestname = localStorage.getItem(`${yyyymmddandtestName}`);
    if (existingDataandTestname)
    {
-       const Datatosave = { scorePercents: scorePercents, score: score };
-     const jsonData = JSON.parse(existingDataandTestname);
-     jsonData.push(Datatosave);
-     localStorage.setItem(`${yyyymmddandtestName}`, JSON.stringify(jsonData));
+    const existingData = JSON.parse(existingDataandTestname);
+    const existingScoreAndTime = existingData.find(data => {
+        return data.scorePercents === scorePercents &&
+               data.score === score &&
+               data.startofwritingtesttime === startofwritingtesttime &&
+               data.endofwritingtesttime === endofwritingtesttime &&
+               data.totaltestwritingtime === totaltestwritingtime;
+    });
 
+    if (!existingScoreAndTime) {
+      const newData = {
+          scorePercents: scorePercents,
+          score: score,
+          startofwritingtesttime: startofwritingtesttime,
+          endofwritingtesttime: endofwritingtesttime,
+          totaltestwritingtime: totaltestwritingtime
+      };
+      existingData.push(newData);
+      localStorage.setItem(`${yyyymmddandtestName}`, JSON.stringify(existingData));
+  } else {
+      console.log("Dane dla tego testu dane dotyczące wyniki i czasu już istnieją w localStorage.");
+  }
    }
    else
    {
@@ -303,13 +345,11 @@ if (percentageDiv && pointsDiv) {
 }
 
 }
-else
-{
-    console.log('Nie znaleziono wymaganych elementów div.');
-}
-
-
-}, 5000);
+      else
+    {
+      console.log('Nie znaleziono wymaganych elementów div.');
+    }
+  }, 5000);
 }
 
 }
