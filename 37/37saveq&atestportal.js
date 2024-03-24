@@ -293,7 +293,7 @@ if (timerTile) {
 } else {
     console.log('Nie znaleziono elementu o klasie "timer-tile".');
 }
-const timetostartsaveprecentandpoints = 2500
+const timetostartsaveprecentandpoints = 1900
 console.log(`Zapisywanie % zdanego testu i ilości zdobytych punktów za ${timetostartsaveprecentandpoints} ms`)
 setTimeout(() => {
 const percentageDiv = document.querySelector('.mdc-typography--headline6.donut-main-value.donut-percents');
@@ -334,7 +334,7 @@ if (percentageDiv && pointsDiv) {
       existingData.push(newData);
       localStorage.setItem(`${yyyymmddandtestName}`, JSON.stringify(existingData));
   } else {
-      console.log("Dane dla tego testu dane dotyczące wyniki i czasu już istnieją w localStorage.");
+      console.log("Dane dotyczące wyników i czasu dla tego testu już istnieją w localStorage.");
   }
    }
    else
