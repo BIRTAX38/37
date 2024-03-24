@@ -226,12 +226,15 @@ if (questionType === "SHORT_ANSWER") {
             //console.log('Wartość z inputa:', typedAnswer);
             if (typedAnswer) {
                 const Changedata = saveselectedanswersinlocalstorage(typedAnswer, "typedAnswer")
-                    
+                
+                /* 
+                //Nie chce mieć tego w console
                 if (Changedata) {
                     console.log("Zaktualizowano obiekt:", Changedata);
                 } else {
                     console.log("Nie znaleziono obiektu o podanym questionId:", questionIdDoZmiany);
                 } 
+                */
             }
         } else {
             console.error('Nie znaleziono inputa.');
