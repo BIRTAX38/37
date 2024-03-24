@@ -306,25 +306,44 @@ if (kluczeWzor.length === 0)
   
                     container.appendChild(p);
                   } 
-                    else if (key === "idOfSelectedAnswer") {
-                      const p = document.createElement('p');
+                  else if (key === "idOfSelectedAnswer") {
+                    const p = document.createElement('p');
+                    let label;
+                    if (value !== null) {
                       const selectedAnswer = obj.answers.find(answer => answer.includes(`answerid="${obj.idOfSelectedAnswer}"`));
-                      const label = selectedAnswer.match(/<label[^>]*>(.*?)<\/label>/)[1];
-                      p.innerHTML = `<label class="savedidOfSelectedAnswer37"><hr><h3>Wybrana odpowiedź:</h3> <ul><li>${label}</li></ul></label>`;
-                      container.appendChild(p);
+                      label = selectedAnswer.match(/<label[^>]*>(.*?)<\/label>/)[1];
+                    } 
+                    else 
+                    {
+                      label = `Żadna odpowiedź nie została wybrana`;
                     }
-                    else if (key === "idsOfSelectedAnswers") {
-                      const p = document.createElement('p');
+                    p.innerHTML = `<label class="savedidOfSelectedAnswer37"><hr><h3>Wybrana odpowiedź:</h3> <ul><li>${label}</li></ul></label>`;
+                    container.appendChild(p);
+                  }
+                  if (key === "idsOfSelectedAnswers") {
+                    if (value !== null) {
                       const answers = obj.answers.filter(answer => obj.idsOfSelectedAnswers.includes(answer.match(/\d+/)[0])); // Filtruj tylko wybrane odpowiedzi
                       const answersHTML = answers.map(answer => {
-                          const label = answer.match(/<label[^>]*>(.*?)<\/label>/)[1];
-                          return `<li>${label}</li>`;
+                        const label = answer.match(/<label[^>]*>(.*?)<\/label>/)[1];
+                        return `<li>${label}</li>`;
                       }).join('');
+                      
+                      const p = document.createElement('p');
                       p.innerHTML = `<label class="savedidsOfSelectedAnswers37"><hr><h3>Wybrane odpowiedzi:</h3> <ul>${answersHTML}</ul></label>`;
                       container.appendChild(p);
+                    } 
+                    else 
+                    {
+                      const p = document.createElement('p');
+                      p.innerHTML = `<label class="savedidsOfSelectedAnswers37"><hr><h3>Wybrane odpowiedzi:</h3> <ul><li>Żadne odpowiedzi nie zostały wybrane</li></ul>`;
+                      container.appendChild(p);
                     }
+                  }                  
                     else if (key === "typedAnswer") {
                     const p = document.createElement('p');
+                    if (value === null) {
+                      value = "(Żadna odpowiedź nie została wpisana)"
+                    }
                     p.innerHTML = `<label class="savedtypedAnswer37"><hr><h3>Wpisana odpowiedź:</h3> <ul><li><p>${value}</li></ul></p></label>`;
                     container.appendChild(p);
                     }
@@ -391,3 +410,4 @@ if (kluczeWzor.length === 0)
 }
   
 setTimeout(start, 500)
+
