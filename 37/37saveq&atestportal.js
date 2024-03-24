@@ -155,7 +155,7 @@ if (questionType === "MULTI_ANSWER") {
 if (questionType === "SHORT_ANSWER") {
     Datatosave.typedAnswer = null;
 }
-console.log(Datatosave)
+//console.log(Datatosave)
   const existingDataandTestname = localStorage.getItem(`${today} ${testName}`);
   if (existingDataandTestname)
   {
@@ -165,7 +165,7 @@ console.log(Datatosave)
   }
     else
     {
-     localStorage.setItem(`${today} ${testName}`, JSON.stringify([{ "Nazwa testu": testName, "Ilość pytań w teście": amountOfQuestions }, Datatosave]));
+     localStorage.setItem(`${today} ${testName}`, JSON.stringify([{ "Test name": testName, "Amount of questions in test": amountOfQuestions }, Datatosave]));
     }
    console.log(`Zapisano pytanie i odpowiedzi w (local storage) dla testu "${today} ${testName}"`);
 }
