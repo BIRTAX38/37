@@ -207,18 +207,20 @@ if (kluczeWzor.length === 0)
                 const datatestu = selectedValue.replace(/(^\d{4}-\d{2}-\d{2}) .*/, '$1');
   
                 Object.entries(obj).forEach(([key, value]) => {
-                  if (key === "Nazwa testu") {
+                  if (key === "Nazwa testu" || key === "Test name") {
                     const h2 = document.createElement('h2')
                     const [rok, miesiac, dzien] = datatestu.split('-');
                     const skonwertowanaData = `${dzien}-${miesiac}-${rok}`;
                     console.log(skonwertowanaData)
-                    h2.innerHTML = `${key}: <br>${value} <br>Data zapisania testu: <br>${skonwertowanaData}`;
+                    h2.innerHTML = `Nazwa testu: <br>${value} <br>Data zapisania testu: <br>${skonwertowanaData}`;
+                    h2.style.textAlign ="center"
                     container.appendChild(h2);
-                  } else if (key === "Ilość pytań w teście") {
+                  } else if (key === "Ilość pytań w teście" || key === "Amount of questions in test") {
                     const spacer = document.createElement('hr');
                     container.appendChild(spacer)
                     const h3amountofquestion = document.createElement('h3');
-                    h3amountofquestion.textContent = `${key}: ${value}`;
+                    h3amountofquestion.textContent = `Ilość pytań w teście: ${value}`;
+                    h3amountofquestion.style.textAlign ="center"
                     container.appendChild(h3amountofquestion)
                     
                     // Odczytaj dane z lokalnego magazynu
@@ -247,6 +249,7 @@ if (kluczeWzor.length === 0)
                   console.log("Liczba elementów z questionHTML w (local storage): " + questionHTMLCount)
                     const h3amountofsavedquestion = document.createElement('h3');
                     h3amountofsavedquestion.textContent = `Ilość zapisanych pytań: ${questionHTMLCount}`;
+                    h3amountofsavedquestion.style.textAlign ="center"
                     container.appendChild(h3amountofsavedquestion);
                   } else if (key === "questionHTML") {
                     numerpytania = numerpytania + 1;
@@ -298,10 +301,30 @@ if (kluczeWzor.length === 0)
                     }
   
                     container.appendChild(p);
-                  } else {
+                  } else if (key === "typedAnswer") {
+                    const p = document.createElement('p');
+                    p.innerHTML = `<label class="savedtypedAnswer37"><hr><h3>Wpisana odpowiedź:</h3> <ul><li><p>${value}</li></ul></p></label>`;
+                    container.appendChild(p);
+                  }
+                    else if (key === "scorePercents") {
+                      const p = document.createElement('p');
+                      p.innerHTML = `<label class="scorePercents"><h3>Wynik testu:</h3><h3>${value}</li></h3></label>`;
+                      p.style.textAlign ="center"
+                      container.appendChild(p);
+                    }
+                    else if (key === "score") {
+                      const p = document.createElement('p');
+                      p.innerHTML = `<label class="score"><h3>${value}</li></h3></label>`;
+                      p.style.textAlign ="center"
+                      container.appendChild(p);
+                    }
+                  else {
                     const p = document.createElement('p');
                     p.innerHTML = `<strong>${value}</strong> ${value}`;
                   }
+
+
+                  
                 });
   
                 logincard.appendChild(container);
