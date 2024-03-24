@@ -270,7 +270,7 @@ else
 {
     if (window.location.href.includes("/exam/test-result.html"))
     {
-        console.log("Zapisywanie % zdanego testu i ilości zdobytych punktów za 3s")
+        console.log("Zapisywanie % zdanego testu i ilości zdobytych punktów za 5s")
         setTimeout(() => {
 const percentageDiv = document.querySelector('.mdc-typography--headline6.donut-main-value.donut-percents');
 const pointsDiv = document.querySelector('.mdc-typography--body1.donut-sub-value');
@@ -309,7 +309,7 @@ else
 }
 
 
-}, 3000);
+}, 5000);
 }
 
 }
