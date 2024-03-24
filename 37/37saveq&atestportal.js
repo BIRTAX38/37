@@ -270,8 +270,6 @@ else
 {
   if (window.location.href.includes("/exam/test-result.html"))
 {
-        console.log("Zapisywanie % zdanego testu i ilości zdobytych punktów za 5s")
-        setTimeout(() => {
 
 const timerTile = document.querySelector('.timer-tile');
 let startofwritingtesttime = "";
@@ -295,8 +293,9 @@ if (timerTile) {
 } else {
     console.log('Nie znaleziono elementu o klasie "timer-tile".');
 }
-
-
+const timetostartsaveprecentandpoints = 2500
+console.log(`Zapisywanie % zdanego testu i ilości zdobytych punktów za ${timetostartsaveprecentandpoints} ms`)
+setTimeout(() => {
 const percentageDiv = document.querySelector('.mdc-typography--headline6.donut-main-value.donut-percents');
 const pointsDiv = document.querySelector('.mdc-typography--body1.donut-sub-value');
 
@@ -349,7 +348,7 @@ if (percentageDiv && pointsDiv) {
     {
       console.log('Nie znaleziono wymaganych elementów div.');
     }
-  }, 5000);
+  }, timetostartsaveprecentandpoints);
 }
 
 }
