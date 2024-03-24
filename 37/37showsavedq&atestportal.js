@@ -391,4 +391,3 @@ if (kluczeWzor.length === 0)
 }
   
 setTimeout(start, 500)
-
