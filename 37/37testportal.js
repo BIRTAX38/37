@@ -13,6 +13,7 @@
 
 //(function() {
 //    'use strict';
+    document.cookie = `blurs=0; path=/exam; secure`;
 console.log("[TESTPORTAL MULTITOOL] started")
 const original = RegExp.prototype.test;
 RegExp.prototype.test = function (s) {
