@@ -305,20 +305,56 @@ if (kluczeWzor.length === 0)
                     }
   
                     container.appendChild(p);
-                  } else if (key === "typedAnswer") {
+                  } 
+                    else if (key === "idOfSelectedAnswer") {
+                      const p = document.createElement('p');
+                      const selectedAnswer = obj.answers.find(answer => answer.includes(`answerid="${obj.idOfSelectedAnswer}"`));
+                      const label = selectedAnswer.match(/<label[^>]*>(.*?)<\/label>/)[1];
+                      p.innerHTML = `<label class="savedidOfSelectedAnswer37"><hr><h3>Wybrana odpowiedź:</h3> <ul><li>${label}</li></ul></label>`;
+                      container.appendChild(p);
+                    }
+                    else if (key === "idsOfSelectedAnswers") {
+                      const p = document.createElement('p');
+                      const answers = obj.answers.filter(answer => obj.idsOfSelectedAnswers.includes(answer.match(/\d+/)[0])); // Filtruj tylko wybrane odpowiedzi
+                      const answersHTML = answers.map(answer => {
+                          const label = answer.match(/<label[^>]*>(.*?)<\/label>/)[1];
+                          return `<li>${label}</li>`;
+                      }).join('');
+                      p.innerHTML = `<label class="savedidsOfSelectedAnswers37"><hr><h3>Wybrane odpowiedzi:</h3> <ul>${answersHTML}</ul></label>`;
+                      container.appendChild(p);
+                    }
+                    else if (key === "typedAnswer") {
                     const p = document.createElement('p');
                     p.innerHTML = `<label class="savedtypedAnswer37"><hr><h3>Wpisana odpowiedź:</h3> <ul><li><p>${value}</li></ul></p></label>`;
                     container.appendChild(p);
-                  }
+                    }
+                    else if (key === "startofwritingtesttime") {
+                      const p = document.createElement('p');
+                      p.innerHTML = `<label class="startofwritingtesttime"><h3>Godzina rozpoczęcia testu:</h3><h3>${value}</h3></label>`;
+                      p.style.textAlign ="center"
+                      container.appendChild(p);
+                    }
+                    else if (key === "endofwritingtesttime") {
+                      const p = document.createElement('p');
+                      p.innerHTML = `<label class="endofwritingtesttime"><h3>Godzina zakończenia testu:</h3><h3>${value}</h3></label>`;
+                      p.style.textAlign ="center"
+                      container.appendChild(p);
+                    }
+                    else if (key === "totaltestwritingtime") {
+                      const p = document.createElement('p');
+                      p.innerHTML = `<label class="totaltestwritingtime"><h3>Czas pisania testu:</h3><h3>${value}</h3></label>`;
+                      p.style.textAlign ="center"
+                      container.appendChild(p);
+                    }
                     else if (key === "scorePercents") {
                       const p = document.createElement('p');
-                      p.innerHTML = `<label class="scorePercents"><h3>Wynik testu:</h3><h3>${value}</li></h3></label>`;
+                      p.innerHTML = `<label class="scorePercents"><h3>Wynik testu:</h3><h3>${value}</h3></label>`;
                       p.style.textAlign ="center"
                       container.appendChild(p);
                     }
                     else if (key === "score") {
                       const p = document.createElement('p');
-                      p.innerHTML = `<label class="score"><h3>${value}</li></h3></label>`;
+                      p.innerHTML = `<label class="score"><h3>${value}</h3></label>`;
                       p.style.textAlign ="center"
                       container.appendChild(p);
                     }
