@@ -280,6 +280,10 @@ if (kluczeWzor.length === 0)
                         else if (answerType === "SURVEY") {
                         answerType = "[Ankietowe]";
                         }
+                        else if (!answerType)
+                        {
+                          answerType = "";
+                        }
                     p.innerHTML = `<h3>Odpowiedzi: ${answerType}</h3>`;
                     
                     if (!value || value.length === 0) {
