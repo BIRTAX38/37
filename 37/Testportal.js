@@ -24,7 +24,9 @@ RegExp.prototype.test = function (s) {
     return r;
 };
 
-logToServer = function(x) { console.log(x) }
+if (typeof logToServer === "function") {
+  logToServer = function(x) { console.log(x) }
+}
 function initPage() {
     if (!window.location.href.includes("LoadTestStart.html")) {
         return
