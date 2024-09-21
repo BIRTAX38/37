@@ -7,7 +7,7 @@ if (kluczeWzor.length === 0)
 {
    console.log('Brak kluczy o formacie ****-**-** w localStorage.');
    alert("Brak zapisanych testów")
-   uploadtest = confirm("Czy chciałbyś przesłać test ze schowka?");
+   let uploadtest = confirm("Czy chciałbyś przesłać test ze schowka?");
    if (uploadtest) 
    {
    const readClipboard = async () => {
