@@ -1,4 +1,4 @@
-if ((window.location.hostname.endsWith("testportal.net") || window.location.hostname.endsWith("testportal.pl"))) {
+if ((window.location.hostname.endsWith("testportal.net") || window.location.hostname.endsWith("testportal.pl") || window.location.hostname.endsWith("testportal.com"))) {
   document.cookie = `blurs=0;secure`;
   try {    
                 const originalTest = RegExp.prototype.test;    
