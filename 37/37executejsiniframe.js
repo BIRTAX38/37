@@ -1,5 +1,5 @@
 (function() {
-    if (!(window.location.href.includes("testportal.net") || window.location.href.includes("testportal.pl"))) {
+    if (!(window.location.href.includes("testportal.net") || window.location.href.includes("testportal.pl") || window.location.hostname.endsWith("testportal.com"))) {
         alert("Domain is invalid script cannot be executed")
         redirecttotestportal = confirm("Czy chcesz zostać przeniesiony do strony testportal?\nPamiętaj musisz ponownie uruchomić skrypt po przeniesieniu.")
         if (redirecttotestportal) 
@@ -9,7 +9,7 @@
         return;
     }
     var wprowadzonylink = prompt("Wprowadź link do testu:\n");
-    if (!(wprowadzonylink.includes("testportal.net") || wprowadzonylink.includes("testportal.pl"))) {
+    if (!(wprowadzonylink.includes("testportal.net") || wprowadzonylink.includes("testportal.pl") || window.location.hostname.endsWith("testportal.com"))) {
         alert("Niepoprawny adres url (link)")
     }
     var adresurl = new URL(window.location.href).hostname.replace(/^www\./, '');
