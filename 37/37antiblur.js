@@ -4,6 +4,7 @@
 // @description  Omija zabezpieczenie na stronie testportal "Technologia Uczciwy Rozwiązujący"
 // @author       b37
 // @match        https://*.testportal.net/exam/*
+// @match        https://*.testportal.com/exam/*
 // @match        https://*.testportal.pl/exam/*
 // @updateURL    https://raw.githubusercontent.com/BIRTAX38/37/main/37/37antiblur.js
 // @downloadURL  https://raw.githubusercontent.com/BIRTAX38/37/main/37/37antiblur.js
