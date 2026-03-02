@@ -1,6 +1,6 @@
 function start()
 {
-if ((window.location.hostname.endsWith("testportal.net") || window.location.hostname.endsWith("testportal.pl"))) {
+if ((window.location.hostname.endsWith("testportal.net") || window.location.hostname.endsWith("testportal.pl") || window.location.hostname.endsWith("testportal.com"))) {
 
     let antitestportalElement37 = document.getElementById("antitestportal37");
 
