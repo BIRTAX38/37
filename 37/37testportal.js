@@ -8,6 +8,7 @@
 // @downloadURL  https://raw.githubusercontent.com/BIRTAX38/37/main/37/37testportal.js
 // @match        https://*.testportal.net/*
 // @match        https://*.testportal.pl/*
+// @match        https://*.testportal.com/*
 // @grant        none
 // ==/UserScript==
 
